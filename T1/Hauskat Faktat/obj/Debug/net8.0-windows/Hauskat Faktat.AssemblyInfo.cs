@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Hauskat Faktat")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0327b51ed3977482deb2bcc4be1090cf708bc583")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f60ff8e1c86215a8bb232c85e53d1575ac1fa8cd")]
 [assembly: System.Reflection.AssemblyProductAttribute("Hauskat Faktat")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Hauskat Faktat")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

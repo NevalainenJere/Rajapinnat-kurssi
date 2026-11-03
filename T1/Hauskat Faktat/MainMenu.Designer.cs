@@ -32,6 +32,7 @@
             buttonGETBreed = new Button();
             labelCatInfo = new Label();
             pictureBoxCat = new PictureBox();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBoxCat).BeginInit();
             SuspendLayout();
             // 
@@ -43,6 +44,7 @@
             buttonGETFact.TabIndex = 0;
             buttonGETFact.Text = "Random Cat Fact";
             buttonGETFact.UseVisualStyleBackColor = true;
+            buttonGETFact.Click += buttonGETFact_Click;
             // 
             // buttonGETBreed
             // 
@@ -52,17 +54,18 @@
             buttonGETBreed.TabIndex = 1;
             buttonGETBreed.Text = "Random Cat Breed";
             buttonGETBreed.UseVisualStyleBackColor = true;
+            buttonGETBreed.Click += buttonGETBreed_Click;
             // 
             // labelCatInfo
             // 
             labelCatInfo.BackColor = Color.White;
             labelCatInfo.BorderStyle = BorderStyle.FixedSingle;
-            labelCatInfo.Enabled = false;
+            labelCatInfo.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelCatInfo.ForeColor = SystemColors.ActiveCaptionText;
             labelCatInfo.Location = new Point(88, 136);
             labelCatInfo.Name = "labelCatInfo";
             labelCatInfo.Size = new Size(555, 236);
             labelCatInfo.TabIndex = 2;
-            labelCatInfo.Text = ".";
             // 
             // pictureBoxCat
             // 
@@ -77,12 +80,22 @@
             pictureBoxCat.TabStop = false;
             pictureBoxCat.Click += pictureBoxCat_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(461, 377);
+            label1.Name = "label1";
+            label1.Size = new Size(268, 20);
+            label1.TabIndex = 4;
+            label1.Text = "Picture by Nikolett Emmert, pexels.com";
+            // 
             // MainMenu
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(255, 192, 255);
             ClientSize = new Size(737, 399);
+            Controls.Add(label1);
             Controls.Add(pictureBoxCat);
             Controls.Add(labelCatInfo);
             Controls.Add(buttonGETBreed);
@@ -93,6 +106,7 @@
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)pictureBoxCat).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -101,5 +115,6 @@
         private Button buttonGETBreed;
         private Label labelCatInfo;
         private PictureBox pictureBoxCat;
+        private Label label1;
     }
 }

@@ -16,3 +16,6 @@ C:\Users\jeren\source\repos\Rajapinnat-kurssi\T1\Hauskat Faktat\obj\Debug\net8.0
 C:\Users\jeren\source\repos\Rajapinnat-kurssi\T1\Hauskat Faktat\obj\Debug\net8.0-windows\Hauskat Faktat.genruntimeconfig.cache
 C:\Users\jeren\source\repos\Rajapinnat-kurssi\T1\Hauskat Faktat\obj\Debug\net8.0-windows\ref\Hauskat Faktat.dll
 C:\Users\jeren\source\repos\Rajapinnat-kurssi\T1\Hauskat Faktat\obj\Debug\net8.0-windows\Hauskat_Faktat.Properties.Resources.resources
+C:\Users\jeren\source\repos\Rajapinnat-kurssi\T1\Hauskat Faktat\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
+C:\Users\jeren\source\repos\Rajapinnat-kurssi\T1\Hauskat Faktat\obj\Debug\net8.0-windows\Hauskat Faktat.csproj.AssemblyReference.cache
+C:\Users\jeren\source\repos\Rajapinnat-kurssi\T1\Hauskat Faktat\obj\Debug\net8.0-windows\Hauskat .8F1BBCFC.Up2Date
