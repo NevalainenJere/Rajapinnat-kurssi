@@ -1,0 +1,18 @@
+C:\Users\jeren\source\repos\Rajapinnat-kurssi\T1\Hauskat Faktat\obj\Debug\net8.0-windows\Hauskat_Faktat.MainMenu.resources
+C:\Users\jeren\source\repos\Rajapinnat-kurssi\T1\Hauskat Faktat\obj\Debug\net8.0-windows\Hauskat Faktat.csproj.GenerateResource.cache
+C:\Users\jeren\source\repos\Rajapinnat-kurssi\T1\Hauskat Faktat\obj\Debug\net8.0-windows\Hauskat Faktat.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jeren\source\repos\Rajapinnat-kurssi\T1\Hauskat Faktat\obj\Debug\net8.0-windows\Hauskat Faktat.AssemblyInfoInputs.cache
+C:\Users\jeren\source\repos\Rajapinnat-kurssi\T1\Hauskat Faktat\obj\Debug\net8.0-windows\Hauskat Faktat.AssemblyInfo.cs
+C:\Users\jeren\source\repos\Rajapinnat-kurssi\T1\Hauskat Faktat\obj\Debug\net8.0-windows\Hauskat Faktat.csproj.CoreCompileInputs.cache
+C:\Users\jeren\source\repos\Rajapinnat-kurssi\T1\Hauskat Faktat\obj\Debug\net8.0-windows\Hauskat Faktat.sourcelink.json
+C:\Users\jeren\source\repos\Rajapinnat-kurssi\T1\Hauskat Faktat\bin\Debug\net8.0-windows\Hauskat Faktat.exe
+C:\Users\jeren\source\repos\Rajapinnat-kurssi\T1\Hauskat Faktat\bin\Debug\net8.0-windows\Hauskat Faktat.deps.json
+C:\Users\jeren\source\repos\Rajapinnat-kurssi\T1\Hauskat Faktat\bin\Debug\net8.0-windows\Hauskat Faktat.runtimeconfig.json
+C:\Users\jeren\source\repos\Rajapinnat-kurssi\T1\Hauskat Faktat\bin\Debug\net8.0-windows\Hauskat Faktat.dll
+C:\Users\jeren\source\repos\Rajapinnat-kurssi\T1\Hauskat Faktat\bin\Debug\net8.0-windows\Hauskat Faktat.pdb
+C:\Users\jeren\source\repos\Rajapinnat-kurssi\T1\Hauskat Faktat\obj\Debug\net8.0-windows\Hauskat Faktat.dll
+C:\Users\jeren\source\repos\Rajapinnat-kurssi\T1\Hauskat Faktat\obj\Debug\net8.0-windows\refint\Hauskat Faktat.dll
+C:\Users\jeren\source\repos\Rajapinnat-kurssi\T1\Hauskat Faktat\obj\Debug\net8.0-windows\Hauskat Faktat.pdb
+C:\Users\jeren\source\repos\Rajapinnat-kurssi\T1\Hauskat Faktat\obj\Debug\net8.0-windows\Hauskat Faktat.genruntimeconfig.cache
+C:\Users\jeren\source\repos\Rajapinnat-kurssi\T1\Hauskat Faktat\obj\Debug\net8.0-windows\ref\Hauskat Faktat.dll
+C:\Users\jeren\source\repos\Rajapinnat-kurssi\T1\Hauskat Faktat\obj\Debug\net8.0-windows\Hauskat_Faktat.Properties.Resources.resources
