@@ -103,7 +103,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "MainMenu";
-            Text = "Form1";
+            Text = "Kissa-faktat";
             ((System.ComponentModel.ISupportInitialize)pictureBoxCat).EndInit();
             ResumeLayout(false);
             PerformLayout();
