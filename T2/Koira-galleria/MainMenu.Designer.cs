@@ -1,6 +1,6 @@
 ﻿namespace Koira_galleria
 {
-    partial class Form1
+    partial class MainMenu
     {
         /// <summary>
         ///  Required designer variable.
@@ -38,9 +38,9 @@
             // 
             pictureBox1.Image = Properties.Resources.placeholder_dog_photo;
             pictureBox1.InitialImage = Properties.Resources.placeholder_dog_photo;
-            pictureBox1.Location = new Point(182, 139);
+            pictureBox1.Location = new Point(182, 142);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(332, 252);
+            pictureBox1.Size = new Size(326, 214);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
@@ -65,7 +65,7 @@
             buttonRandomDog.UseVisualStyleBackColor = true;
             buttonRandomDog.Click += buttonRandomDog_Click;
             // 
-            // Form1
+            // MainMenu
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -76,7 +76,7 @@
             Controls.Add(pictureBox1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
-            Name = "Form1";
+            Name = "MainMenu";
             Text = "Koira-galleria";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
