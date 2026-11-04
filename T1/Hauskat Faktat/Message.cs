@@ -9,6 +9,5 @@ namespace Hauskat_Faktat
     internal class Message
     {
         public string fact;
-        public string breed;
     }
 }

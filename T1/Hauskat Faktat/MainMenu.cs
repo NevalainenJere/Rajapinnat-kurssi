@@ -43,7 +43,7 @@ namespace Hauskat_Faktat
 
                 if (result != null)
                 {
-                    labelCatInfo.Text = jsonResponseDeserialized.fact;
+                    labelCatInfo.Text = "RANDOM CAT FACT: " + jsonResponseDeserialized.fact;
                 }
                 else
                 {
@@ -58,8 +58,7 @@ namespace Hauskat_Faktat
 
         private async void buttonGETBreed_Click(object sender, EventArgs e)
         {
-            int breedTotalCount = 97;
-            Random rand = new Random(breedTotalCount);
+            Random rand = new Random();
 
             try
             {
@@ -71,14 +70,20 @@ namespace Hauskat_Faktat
 
                 int resultCount = result.Length;
 
-                var jsonResponseDeserialized = JsonConvert.DeserializeObject<Message>(result);
-                var jsonResponseRandom = rand.Next(result[rand.Next()]);
+                var jsonResponseDeserialized = JsonConvert.DeserializeObject<BreedResponse>(result);
+
+                int x = rand.Next(jsonResponseDeserialized.data.Count);
 
 
                 if (result != null)
                 {
-                    
-                    labelCatInfo.Text = jsonResponseDeserialized.breed;
+                    var breedDict = jsonResponseDeserialized.data[x];
+                    var randomBreed = breedDict.TryGetValue("breed", out string? value);
+                    if (value == null)
+                    {
+                        labelCatInfo.Text = "The response came back invalid";
+                    }
+                    labelCatInfo.Text = "RANDOM CAT BREED: " + value;
                 }
                 else
                 {
