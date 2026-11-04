@@ -66,5 +66,16 @@ namespace Koira_galleria
 
             pictureBox1.ImageLocation = jsonResponseDeserialized.message;
         }
+
+        private async void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string breed = comboBox1.Text;
+            var endpoint = new Uri("https://dog.ceo/api/breed/" + breed + "/images/random");
+            var httpRequest = await client.GetAsync(endpoint);
+            var result = await httpRequest.Content.ReadAsStringAsync();
+            var jsonResponseDeserialized = JsonConvert.DeserializeObject<Response>(result);
+
+            pictureBox1.ImageLocation = jsonResponseDeserialized.message;
+        }
     }
 }
