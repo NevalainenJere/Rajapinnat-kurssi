@@ -1,6 +1,6 @@
 ﻿namespace Pokedex
 {
-    partial class Form1
+    partial class MainMenu
     {
         /// <summary>
         ///  Required designer variable.
@@ -36,51 +36,57 @@
             // 
             // textBoxSearch
             // 
-            textBoxSearch.Location = new Point(236, 34);
+            textBoxSearch.Location = new Point(295, 42);
+            textBoxSearch.Margin = new Padding(4);
             textBoxSearch.Name = "textBoxSearch";
-            textBoxSearch.Size = new Size(355, 27);
+            textBoxSearch.Size = new Size(443, 31);
             textBoxSearch.TabIndex = 0;
             // 
             // labelInfo
             // 
             labelInfo.BackColor = Color.WhiteSmoke;
             labelInfo.BorderStyle = BorderStyle.FixedSingle;
-            labelInfo.Location = new Point(53, 98);
+            labelInfo.Location = new Point(66, 122);
+            labelInfo.Margin = new Padding(4, 0, 4, 0);
             labelInfo.Name = "labelInfo";
-            labelInfo.Size = new Size(661, 346);
+            labelInfo.Size = new Size(826, 432);
             labelInfo.TabIndex = 1;
             // 
             // labelSearch
             // 
             labelSearch.AutoSize = true;
-            labelSearch.Font = new Font("Calibri", 12F);
-            labelSearch.Location = new Point(34, 34);
+            labelSearch.Font = new Font("Calibri", 12F, FontStyle.Bold);
+            labelSearch.Location = new Point(42, 42);
+            labelSearch.Margin = new Padding(4, 0, 4, 0);
             labelSearch.Name = "labelSearch";
-            labelSearch.Size = new Size(196, 24);
+            labelSearch.Size = new Size(239, 29);
             labelSearch.TabIndex = 2;
             labelSearch.Text = "Hae Pokémon nimellä:";
             // 
             // buttonSearch
             // 
-            buttonSearch.BackColor = Color.Yellow;
+            buttonSearch.BackColor = Color.Gold;
             buttonSearch.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            buttonSearch.Location = new Point(620, 33);
+            buttonSearch.Location = new Point(775, 41);
+            buttonSearch.Margin = new Padding(4);
             buttonSearch.Name = "buttonSearch";
-            buttonSearch.Size = new Size(94, 29);
+            buttonSearch.Size = new Size(118, 36);
             buttonSearch.TabIndex = 3;
             buttonSearch.Text = "Hae";
             buttonSearch.UseVisualStyleBackColor = false;
+            buttonSearch.Click += buttonSearch_Click;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Red;
-            ClientSize = new Size(776, 466);
+            BackColor = Color.Firebrick;
+            ClientSize = new Size(970, 582);
             Controls.Add(buttonSearch);
             Controls.Add(labelSearch);
             Controls.Add(labelInfo);
             Controls.Add(textBoxSearch);
+            Margin = new Padding(4);
             Name = "Form1";
             Text = "Form1";
             ResumeLayout(false);
