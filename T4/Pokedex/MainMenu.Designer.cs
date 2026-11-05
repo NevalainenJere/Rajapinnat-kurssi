@@ -76,7 +76,7 @@
             buttonSearch.UseVisualStyleBackColor = false;
             buttonSearch.Click += buttonSearch_Click;
             // 
-            // Form1
+            // MainMenu
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -86,8 +86,9 @@
             Controls.Add(labelSearch);
             Controls.Add(labelInfo);
             Controls.Add(textBoxSearch);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(4);
-            Name = "Form1";
+            Name = "MainMenu";
             Text = "Form1";
             ResumeLayout(false);
             PerformLayout();

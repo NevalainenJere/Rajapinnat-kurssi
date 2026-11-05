@@ -14,6 +14,6 @@ namespace Pokedex
         public string types;
         public int weight;
         public int height;
-        public string stats;
+        //public string stats;
     }
 }

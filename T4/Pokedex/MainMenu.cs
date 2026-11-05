@@ -14,6 +14,7 @@ namespace Pokedex
         }
         private async void buttonSearch_Click(object sender, EventArgs e)
         {
+            List<char> types = new List<char>();
             string search = textBoxSearch.Text.ToLower();
             textBoxSearch.Text = null;
 
@@ -22,21 +23,14 @@ namespace Pokedex
             var result = await httpRequest.Content.ReadAsStringAsync();
             var response = JsonConvert.DeserializeObject<Response>(result);
 
-            if (response is null)
+            foreach (var type in response.types)
             {
-                labelInfo.Text = "Could not read the Pokémon response.";
-                return;
+                types.Add(type);
             }
 
-            var output = $"{response.Name}\r\n";
+            string responseDisplay = $"Name: {response.name}\r\nId: {response.id}\r\nTypes: {response.types}";
 
-            foreach (var pokemonStat in response.Stats)
-            {
-                output += $"{pokemonStat.Stat?.Name}: {pokemonStat.BaseStat}\r\n";
-            }
-
-            labelInfo.Text = output;
-
+            labelInfo.Text = responseDisplay;
         }
     }
 }
