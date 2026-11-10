@@ -29,7 +29,7 @@ namespace Pokedex
 
         private static string PokemonDataString(PokemonData? response)
         {
-            List<string> typeToStringList = new List<string>();
+            List<string> typesToStringList = new List<string>();
             List<string> statsToStringList = new List<string>();
             string PokemonTypes = "";
             string PokemonStats = "";
@@ -42,11 +42,19 @@ namespace Pokedex
 
             foreach (var pokeType in response.types)
             {
-                typeToStringList.Add(pokeType.type.name);
+                typesToStringList.Add(pokeType.type.name);
             }
-            for (int i = 0; i < typeToStringList.Count; i++)
+            for (int i = 0; i < typesToStringList.Count; i++)
             {
-                PokemonTypes += $"{typeToStringList[i]}, ";
+                if (i == typesToStringList.Count - 1)
+                {
+                    PokemonTypes += $"{typesToStringList[i]}";
+                    PokemonTypes = PokemonTypes;
+                }
+                else
+                {
+                    PokemonTypes += $"{typesToStringList[i]}, ";
+                }
             }
 
             foreach (var pokeStat in response.stats)
@@ -72,12 +80,12 @@ namespace Pokedex
                 }
             }
             return
-                $"Name: {PokemonName}\r\n" +
+                $"Name: {PokemonName.ToUpper()}\r\n" +
                 $"Id: {PokemonId}\r\n" +
-                $"Type: {PokemonTypes}\r\n" +
+                $"Type: {PokemonTypes.ToUpper()}\r\n" +
                 $"Weight: {PokemonWeight}\r\n" +
                 $"Height: {PokemonHeight}\r\n" +
-                $"Stats: {PokemonStats}\r\n";
+                $"Stats: {PokemonStats.ToUpper()}\r\n";
         }
         private void InitialString()
         {
