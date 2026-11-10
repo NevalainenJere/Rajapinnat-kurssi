@@ -32,24 +32,31 @@
             labelInfo = new Label();
             labelSearch = new Label();
             buttonSearch = new Button();
+            pictureNormal = new PictureBox();
+            pictureShiny = new PictureBox();
+            labelNormal = new Label();
+            labelShiny = new Label();
+            ((System.ComponentModel.ISupportInitialize)pictureNormal).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureShiny).BeginInit();
             SuspendLayout();
             // 
             // textBoxSearch
             // 
-            textBoxSearch.Location = new Point(295, 42);
+            textBoxSearch.Location = new Point(377, 42);
             textBoxSearch.Margin = new Padding(4);
             textBoxSearch.Name = "textBoxSearch";
-            textBoxSearch.Size = new Size(443, 31);
+            textBoxSearch.Size = new Size(361, 31);
             textBoxSearch.TabIndex = 0;
             // 
             // labelInfo
             // 
             labelInfo.BackColor = Color.WhiteSmoke;
             labelInfo.BorderStyle = BorderStyle.FixedSingle;
+            labelInfo.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             labelInfo.Location = new Point(66, 122);
             labelInfo.Margin = new Padding(4, 0, 4, 0);
             labelInfo.Name = "labelInfo";
-            labelInfo.Size = new Size(826, 432);
+            labelInfo.Size = new Size(826, 187);
             labelInfo.TabIndex = 1;
             // 
             // labelSearch
@@ -59,9 +66,9 @@
             labelSearch.Location = new Point(42, 42);
             labelSearch.Margin = new Padding(4, 0, 4, 0);
             labelSearch.Name = "labelSearch";
-            labelSearch.Size = new Size(239, 29);
+            labelSearch.Size = new Size(327, 29);
             labelSearch.TabIndex = 2;
-            labelSearch.Text = "Hae Pokémon nimellä:";
+            labelSearch.Text = "Hae Pokémon nimellä tai ID:llä:";
             // 
             // buttonSearch
             // 
@@ -76,12 +83,58 @@
             buttonSearch.UseVisualStyleBackColor = false;
             buttonSearch.Click += buttonSearch_Click;
             // 
+            // pictureNormal
+            // 
+            pictureNormal.BackColor = Color.Firebrick;
+            pictureNormal.Image = Properties.Resources.no_pokemon_selected;
+            pictureNormal.Location = new Point(66, 357);
+            pictureNormal.Name = "pictureNormal";
+            pictureNormal.Size = new Size(200, 200);
+            pictureNormal.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureNormal.TabIndex = 4;
+            pictureNormal.TabStop = false;
+            // 
+            // pictureShiny
+            // 
+            pictureShiny.BackColor = Color.Firebrick;
+            pictureShiny.Image = Properties.Resources.no_pokemon_selected;
+            pictureShiny.Location = new Point(693, 357);
+            pictureShiny.Name = "pictureShiny";
+            pictureShiny.Size = new Size(200, 200);
+            pictureShiny.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureShiny.TabIndex = 4;
+            pictureShiny.TabStop = false;
+            // 
+            // labelNormal
+            // 
+            labelNormal.AutoSize = true;
+            labelNormal.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelNormal.Location = new Point(66, 327);
+            labelNormal.Name = "labelNormal";
+            labelNormal.Size = new Size(80, 25);
+            labelNormal.TabIndex = 5;
+            labelNormal.Text = "Normal:";
+            // 
+            // labelShiny
+            // 
+            labelShiny.AutoSize = true;
+            labelShiny.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelShiny.Location = new Point(693, 327);
+            labelShiny.Name = "labelShiny";
+            labelShiny.Size = new Size(64, 25);
+            labelShiny.TabIndex = 5;
+            labelShiny.Text = "Shiny:";
+            // 
             // MainMenu
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Firebrick;
             ClientSize = new Size(970, 582);
+            Controls.Add(labelShiny);
+            Controls.Add(labelNormal);
+            Controls.Add(pictureShiny);
+            Controls.Add(pictureNormal);
             Controls.Add(buttonSearch);
             Controls.Add(labelSearch);
             Controls.Add(labelInfo);
@@ -90,6 +143,8 @@
             Margin = new Padding(4);
             Name = "MainMenu";
             Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)pictureNormal).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureShiny).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -100,5 +155,9 @@
         private Label labelInfo;
         private Label labelSearch;
         private Button buttonSearch;
+        private PictureBox pictureNormal;
+        private PictureBox pictureShiny;
+        private Label labelNormal;
+        private Label labelShiny;
     }
 }

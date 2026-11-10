@@ -22,70 +22,92 @@ namespace Pokedex
             var result = await httpRequest.Content.ReadAsStringAsync();
             var response = JsonConvert.DeserializeObject<PokemonData>(result);
             string responseDisplay = PokemonDataString(response);
+            PokemonSpriteFetch(response);
 
             labelInfo.Text = responseDisplay;
-            ToString();
         }
 
+        public void PokemonSpriteFetch(PokemonData? response)
+        {
+            try
+            {
+                string PokemonSpriteDefault = response.sprites.front_default;
+                string PokemonSpriteShiny = response.sprites.front_shiny;
+
+                pictureNormal.ImageLocation = PokemonSpriteDefault;
+                pictureShiny.ImageLocation = PokemonSpriteShiny;
+            }
+            catch (NullReferenceException e)
+            {
+
+            }
+        }
         private static string PokemonDataString(PokemonData? response)
         {
-            List<string> typesToStringList = new List<string>();
-            List<string> statsToStringList = new List<string>();
-            string PokemonTypes = "";
-            string PokemonStats = "";
 
-            string PokemonName = response.name;
-            int PokemonId = response.id;
-            int PokemonWeight = response.weight;
-            int PokemonHeight = response.height;
+            try
+            {
+                List<string> typesToStringList = new List<string>();
+                List<string> statsToStringList = new List<string>();
+                string PokemonTypes = "";
+                string PokemonStats = "";
 
+                string PokemonName = response.name;
+                int PokemonId = response.id;
+                int PokemonWeight = response.weight;
+                int PokemonHeight = response.height;
 
-            foreach (var pokeType in response.types)
-            {
-                typesToStringList.Add(pokeType.type.name);
-            }
-            for (int i = 0; i < typesToStringList.Count; i++)
-            {
-                if (i == typesToStringList.Count - 1)
+                foreach (var pokeType in response.types)
                 {
-                    PokemonTypes += $"{typesToStringList[i]}";
-                    PokemonTypes = PokemonTypes;
+                    typesToStringList.Add(pokeType.type.name);
                 }
-                else
+                for (int i = 0; i < typesToStringList.Count; i++)
                 {
-                    PokemonTypes += $"{typesToStringList[i]}, ";
+                    if (i == typesToStringList.Count - 1)
+                    {
+                        PokemonTypes += $"{typesToStringList[i]}";
+                        PokemonTypes = PokemonTypes;
+                    }
+                    else
+                    {
+                        PokemonTypes += $"{typesToStringList[i]}, ";
+                    }
                 }
-            }
 
-            foreach (var pokeStat in response.stats)
-            {
-                statsToStringList.Add(pokeStat.stat.name.ToUpper());
-                statsToStringList.Add(pokeStat.base_stat.ToString());
+                foreach (var pokeStat in response.stats)
+                {
+                    statsToStringList.Add(pokeStat.stat.name.ToUpper());
+                    statsToStringList.Add(pokeStat.base_stat.ToString());
+                }
+                for (int i = 0; i < statsToStringList.Count; i++)
+                {
+                    if (i == statsToStringList.Count - 1)
+                    {
+                        //PokemonStats = statsToString.Remove(statsToString.Length - 1);
+                        PokemonStats += $"{statsToStringList[i]}";
+                        PokemonStats = PokemonStats;
+                    }
+                    else if ((i + 1) % 2 == 0)
+                    {
+                        PokemonStats += $"{statsToStringList[i]}, ";
+                    }
+                    else
+                    {
+                        PokemonStats += $"{statsToStringList[i]}: ";
+                    }
+                }
+                return
+                    $"Name: {PokemonName.ToUpper()}\r\n" +
+                    $"Id: {PokemonId}\r\n" +
+                    $"Type: {PokemonTypes.ToUpper()}\r\n" +
+                    $"Weight: {PokemonWeight}\r\n" +
+                    $"Height: {PokemonHeight}\r\n" +
+                    $"Stats: {PokemonStats.ToUpper()}\r\n";
             }
-            for (int i = 0; i < statsToStringList.Count; i++)
+            catch (NullReferenceException e)
             {
-                if (i == statsToStringList.Count - 1)
-                {
-                    //PokemonStats = statsToString.Remove(statsToString.Length - 1);
-                    PokemonStats += $"{statsToStringList[i]}";
-                    PokemonStats = PokemonStats;
-                }
-                else if ((i + 1) % 2 == 0)
-                {
-                    PokemonStats += $"{statsToStringList[i]}, ";
-                }
-                else
-                {
-                    PokemonStats += $"{statsToStringList[i]}: ";
-                }
+                return $"Invalid name or ID!";
             }
-            return
-                $"Name: {PokemonName.ToUpper()}\r\n" +
-                $"Id: {PokemonId}\r\n" +
-                $"Type: {PokemonTypes.ToUpper()}\r\n" +
-                $"Weight: {PokemonWeight}\r\n" +
-                $"Height: {PokemonHeight}\r\n" +
-                $"Stats: {PokemonStats.ToUpper()}\r\n";
         }
         private void InitialString()
         {
