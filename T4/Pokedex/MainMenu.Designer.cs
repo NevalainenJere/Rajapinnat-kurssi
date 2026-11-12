@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             textBoxSearch = new TextBox();
-            labelInfo = new Label();
             labelSearch = new Label();
             buttonSearch = new Button();
             pictureNormal = new PictureBox();
@@ -38,39 +37,27 @@
             labelShiny = new Label();
             buttonPrevious = new Button();
             buttonNext = new Button();
+            richTextBoxInfo = new RichTextBox();
             ((System.ComponentModel.ISupportInitialize)pictureNormal).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureShiny).BeginInit();
             SuspendLayout();
             // 
             // textBoxSearch
             // 
-            textBoxSearch.Location = new Point(377, 42);
-            textBoxSearch.Margin = new Padding(4);
+            textBoxSearch.Location = new Point(316, 34);
             textBoxSearch.Name = "textBoxSearch";
-            textBoxSearch.Size = new Size(361, 31);
+            textBoxSearch.Size = new Size(290, 27);
             textBoxSearch.TabIndex = 0;
             textBoxSearch.KeyDown += textBoxSearch_KeyDown;
-            // 
-            // labelInfo
-            // 
-            labelInfo.BackColor = Color.WhiteSmoke;
-            labelInfo.BorderStyle = BorderStyle.FixedSingle;
-            labelInfo.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            labelInfo.Location = new Point(66, 122);
-            labelInfo.Margin = new Padding(4, 0, 4, 0);
-            labelInfo.Name = "labelInfo";
-            labelInfo.Size = new Size(826, 187);
-            labelInfo.TabIndex = 1;
             // 
             // labelSearch
             // 
             labelSearch.AutoSize = true;
             labelSearch.Font = new Font("Calibri", 12F, FontStyle.Bold);
             labelSearch.ForeColor = Color.White;
-            labelSearch.Location = new Point(42, 42);
-            labelSearch.Margin = new Padding(4, 0, 4, 0);
+            labelSearch.Location = new Point(34, 34);
             labelSearch.Name = "labelSearch";
-            labelSearch.Size = new Size(327, 29);
+            labelSearch.Size = new Size(276, 24);
             labelSearch.TabIndex = 2;
             labelSearch.Text = "Hae Pokémon nimellä tai ID:llä:";
             // 
@@ -78,10 +65,9 @@
             // 
             buttonSearch.BackColor = Color.Gold;
             buttonSearch.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            buttonSearch.Location = new Point(775, 41);
-            buttonSearch.Margin = new Padding(4);
+            buttonSearch.Location = new Point(620, 33);
             buttonSearch.Name = "buttonSearch";
-            buttonSearch.Size = new Size(118, 36);
+            buttonSearch.Size = new Size(94, 29);
             buttonSearch.TabIndex = 3;
             buttonSearch.Text = "Hae";
             buttonSearch.UseVisualStyleBackColor = false;
@@ -91,9 +77,10 @@
             // 
             pictureNormal.BackColor = Color.Firebrick;
             pictureNormal.Image = Properties.Resources.no_pokemon_selected;
-            pictureNormal.Location = new Point(66, 357);
+            pictureNormal.Location = new Point(53, 286);
+            pictureNormal.Margin = new Padding(2);
             pictureNormal.Name = "pictureNormal";
-            pictureNormal.Size = new Size(200, 200);
+            pictureNormal.Size = new Size(160, 160);
             pictureNormal.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureNormal.TabIndex = 4;
             pictureNormal.TabStop = false;
@@ -102,9 +89,10 @@
             // 
             pictureShiny.BackColor = Color.Firebrick;
             pictureShiny.Image = Properties.Resources.no_pokemon_selected;
-            pictureShiny.Location = new Point(347, 357);
+            pictureShiny.Location = new Point(278, 286);
+            pictureShiny.Margin = new Padding(2);
             pictureShiny.Name = "pictureShiny";
-            pictureShiny.Size = new Size(200, 200);
+            pictureShiny.Size = new Size(160, 160);
             pictureShiny.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureShiny.TabIndex = 4;
             pictureShiny.TabStop = false;
@@ -114,9 +102,10 @@
             labelNormal.AutoSize = true;
             labelNormal.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             labelNormal.ForeColor = Color.White;
-            labelNormal.Location = new Point(66, 324);
+            labelNormal.Location = new Point(53, 259);
+            labelNormal.Margin = new Padding(2, 0, 2, 0);
             labelNormal.Name = "labelNormal";
-            labelNormal.Size = new Size(96, 30);
+            labelNormal.Size = new Size(84, 25);
             labelNormal.TabIndex = 5;
             labelNormal.Text = "Normal:";
             // 
@@ -125,18 +114,20 @@
             labelShiny.AutoSize = true;
             labelShiny.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             labelShiny.ForeColor = Color.White;
-            labelShiny.Location = new Point(347, 324);
+            labelShiny.Location = new Point(278, 259);
+            labelShiny.Margin = new Padding(2, 0, 2, 0);
             labelShiny.Name = "labelShiny";
-            labelShiny.Size = new Size(75, 30);
+            labelShiny.Size = new Size(66, 25);
             labelShiny.TabIndex = 5;
             labelShiny.Text = "Shiny:";
             // 
             // buttonPrevious
             // 
             buttonPrevious.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            buttonPrevious.Location = new Point(622, 357);
+            buttonPrevious.Location = new Point(498, 286);
+            buttonPrevious.Margin = new Padding(2);
             buttonPrevious.Name = "buttonPrevious";
-            buttonPrevious.Size = new Size(294, 88);
+            buttonPrevious.Size = new Size(235, 70);
             buttonPrevious.TabIndex = 6;
             buttonPrevious.Text = "Previous";
             buttonPrevious.UseVisualStyleBackColor = true;
@@ -145,20 +136,32 @@
             // buttonNext
             // 
             buttonNext.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            buttonNext.Location = new Point(622, 469);
+            buttonNext.Location = new Point(498, 375);
+            buttonNext.Margin = new Padding(2);
             buttonNext.Name = "buttonNext";
-            buttonNext.Size = new Size(294, 88);
+            buttonNext.Size = new Size(235, 70);
             buttonNext.TabIndex = 6;
             buttonNext.Text = "Next";
             buttonNext.UseVisualStyleBackColor = true;
             buttonNext.Click += buttonNext_Click;
             // 
+            // richTextBoxInfo
+            // 
+            richTextBoxInfo.Location = new Point(34, 71);
+            richTextBoxInfo.Name = "richTextBoxInfo";
+            richTextBoxInfo.ReadOnly = true;
+            richTextBoxInfo.Size = new Size(680, 175);
+            richTextBoxInfo.TabIndex = 7;
+            richTextBoxInfo.Text = "";
+            richTextBoxInfo.Enter += richTextBoxInfo_Enter;
+            // 
             // MainMenu
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Firebrick;
-            ClientSize = new Size(970, 582);
+            ClientSize = new Size(776, 466);
+            Controls.Add(richTextBoxInfo);
             Controls.Add(buttonNext);
             Controls.Add(buttonPrevious);
             Controls.Add(labelShiny);
@@ -167,10 +170,8 @@
             Controls.Add(pictureNormal);
             Controls.Add(buttonSearch);
             Controls.Add(labelSearch);
-            Controls.Add(labelInfo);
             Controls.Add(textBoxSearch);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Margin = new Padding(4);
             Name = "MainMenu";
             Text = "Pokédex Desktop";
             ((System.ComponentModel.ISupportInitialize)pictureNormal).EndInit();
@@ -182,7 +183,6 @@
         #endregion
 
         private TextBox textBoxSearch;
-        private Label labelInfo;
         private Label labelSearch;
         private Button buttonSearch;
         private PictureBox pictureNormal;
@@ -191,5 +191,6 @@
         private Label labelShiny;
         private Button buttonPrevious;
         private Button buttonNext;
+        private RichTextBox richTextBoxInfo;
     }
 }
