@@ -12,6 +12,7 @@ namespace Pokedex
         int nextId;
         int previousId;
         string pokemonTypes;
+        string invalidInputError = $"Invalid name or ID!\r\n\r\nPokémon amount as of November 13th, 2026 is 1025.";
 
         public MainMenu()
         {
@@ -37,129 +38,172 @@ namespace Pokedex
                 ButtonTextSetter(response);
 
                 richTextBoxInfo.Text = responseDisplay;
-
-                string target = pokemonTypes.ToUpper();
-                int startIndex = richTextBoxInfo.Text.IndexOf(target);
-
-                List<string> items = target.Split(',', ' ').ToList();
-
-                if (startIndex != -1)
-                {
-                    foreach (var item in items)
-                    {
-                        switch (item)
-                        {
-                            case "MORMAL":
-                                startIndex = richTextBoxInfo.Text.IndexOf(item);
-                                richTextBoxInfo.Select(startIndex, target.Length);
-                                richTextBoxInfo.SelectionColor = Color.Gray;
-                                richTextBoxInfo.SelectionLength = 0;
-                                break;
-                            case "FIRE":
-                                startIndex = richTextBoxInfo.Text.IndexOf(item);
-                                richTextBoxInfo.Select(startIndex, target.Length);
-                                richTextBoxInfo.SelectionColor = Color.Red;
-                                richTextBoxInfo.SelectionLength = 0;
-                                break;
-                            case "WATER":
-                                startIndex = richTextBoxInfo.Text.IndexOf(item);
-                                richTextBoxInfo.Select(startIndex, target.Length);
-                                richTextBoxInfo.SelectionColor = Color.Blue;
-                                richTextBoxInfo.SelectionLength = 0;
-                                break;
-                            case "ELECTRIC":
-                                startIndex = richTextBoxInfo.Text.IndexOf(item);
-                                richTextBoxInfo.Select(startIndex, target.Length);
-                                richTextBoxInfo.SelectionColor = Color.Gold;
-                                richTextBoxInfo.SelectionLength = 0;
-                                break;
-                            case "GRASS":
-                                startIndex = richTextBoxInfo.Text.IndexOf(item);
-                                richTextBoxInfo.Select(startIndex, target.Length);
-                                richTextBoxInfo.SelectionColor = Color.LimeGreen;
-                                richTextBoxInfo.SelectionLength = 0;
-                                break;
-                            case "ICE":
-                                startIndex = richTextBoxInfo.Text.IndexOf(item);
-                                richTextBoxInfo.Select(startIndex, target.Length);
-                                richTextBoxInfo.SelectionColor = Color.LightSkyBlue;
-                                richTextBoxInfo.SelectionLength = 0;
-                                break;
-                            case "Fighting":
-                                startIndex = richTextBoxInfo.Text.IndexOf(item);
-                                richTextBoxInfo.Select(startIndex, target.Length);
-                                richTextBoxInfo.SelectionColor = Color.SaddleBrown;
-                                richTextBoxInfo.SelectionLength = 0;
-                                break;
-                            case "POISON":
-                                startIndex = richTextBoxInfo.Text.IndexOf(item);
-                                richTextBoxInfo.Select(startIndex, target.Length);
-                                richTextBoxInfo.SelectionColor = Color.MediumVioletRed;
-                                richTextBoxInfo.SelectionLength = 0;
-                                break;
-                            case "GROUND":
-                                startIndex = richTextBoxInfo.Text.IndexOf(item);
-                                richTextBoxInfo.Select(startIndex, target.Length);
-                                richTextBoxInfo.SelectionColor = Color.Wheat;
-                                richTextBoxInfo.SelectionLength = 0;
-                                break;
-                            case "FLYING":
-                                startIndex = richTextBoxInfo.Text.IndexOf(item);
-                                richTextBoxInfo.Select(startIndex, target.Length);
-                                richTextBoxInfo.SelectionColor = Color.DeepSkyBlue;
-                                richTextBoxInfo.SelectionLength = 0;
-                                break;
-                            case "PSYCHIC":
-                                startIndex = richTextBoxInfo.Text.IndexOf(item);
-                                richTextBoxInfo.Select(startIndex, target.Length);
-                                richTextBoxInfo.SelectionColor = Color.DeepPink;
-                                richTextBoxInfo.SelectionLength = 0;
-                                break;
-                            case "BUG":
-                                startIndex = richTextBoxInfo.Text.IndexOf(item);
-                                richTextBoxInfo.Select(startIndex, target.Length);
-                                richTextBoxInfo.SelectionColor = Color.Olive;
-                                richTextBoxInfo.SelectionLength = 0;
-                                break;
-                            case "ROCK":
-                                startIndex = richTextBoxInfo.Text.IndexOf(item);
-                                richTextBoxInfo.Select(startIndex, target.Length);
-                                richTextBoxInfo.SelectionColor = Color.Tan;
-                                richTextBoxInfo.SelectionLength = 0;
-                                break;
-                            case "GHOST":
-                                startIndex = richTextBoxInfo.Text.IndexOf(item);
-                                richTextBoxInfo.Select(startIndex, target.Length);
-                                richTextBoxInfo.SelectionColor = Color.LightSlateGray;
-                                richTextBoxInfo.SelectionLength = 0;
-                                break;
-                            case "DRAGON":
-                                startIndex = richTextBoxInfo.Text.IndexOf(item);
-                                richTextBoxInfo.Select(startIndex, target.Length);
-                                richTextBoxInfo.SelectionColor = Color.DodgerBlue;
-                                richTextBoxInfo.SelectionLength = 0;
-                                break;
-                            default:
-                                break;
-
-                        }
-                    }
-                }
+                TypeColorSetter();
 
                 nextId = response.id + 1;
                 previousId = response.id - 1;
 
-                if (richTextBoxInfo.Text == "Invalid name or ID!")
+                if (richTextBoxInfo.Text == invalidInputError)
                 {
                     ButtonInitialize();
                 }
             }
             catch (NullReferenceException)
             {
-                richTextBoxInfo.Text = $"Invalid name or ID!";
+                richTextBoxInfo.Text = invalidInputError;
                 ButtonInitialize();
             }
 
+        }
+
+        private void TypeColorSetter()
+        {
+            string targetLine = "Type:";
+            int typesIndex = richTextBoxInfo.Text.IndexOf(targetLine);
+            int searchStart = typesIndex + targetLine.Length;
+            string target = pokemonTypes.ToUpper();
+            int startIndex = 1;
+
+            List<string> items = target.Split(',', ' ').ToList();
+
+            if (startIndex != -1)
+            {
+                foreach (var item in items)
+                {
+                    switch (item)
+                    {
+                        case "NORMAL":
+                            startIndex = richTextBoxInfo.Text.IndexOf(item, searchStart);
+                            target = item;
+                            richTextBoxInfo.Select(startIndex, target.Length);
+                            richTextBoxInfo.SelectionColor = Color.Gray;
+                            richTextBoxInfo.SelectionLength = 0;
+                            break;
+                        case "FIRE":
+                            startIndex = richTextBoxInfo.Text.IndexOf(item, searchStart);
+                            target = item;
+                            richTextBoxInfo.Select(startIndex, target.Length);
+                            richTextBoxInfo.SelectionColor = Color.Red;
+                            richTextBoxInfo.SelectionLength = 0;
+                            break;
+                        case "WATER":
+                            startIndex = richTextBoxInfo.Text.IndexOf(item, searchStart);
+                            target = item;
+                            richTextBoxInfo.Select(startIndex, target.Length);
+                            richTextBoxInfo.SelectionColor = Color.Blue;
+                            richTextBoxInfo.SelectionLength = 0;
+                            break;
+                        case "ELECTRIC":
+                            startIndex = richTextBoxInfo.Text.IndexOf(item, searchStart);
+                            target = item;
+                            richTextBoxInfo.Select(startIndex, target.Length);
+                            richTextBoxInfo.SelectionColor = Color.Gold;
+                            richTextBoxInfo.SelectionLength = 0;
+                            break;
+                        case "GRASS":
+                            startIndex = richTextBoxInfo.Text.IndexOf(item, searchStart);
+                            target = item;
+                            richTextBoxInfo.Select(startIndex, target.Length);
+                            richTextBoxInfo.SelectionColor = Color.LimeGreen;
+                            richTextBoxInfo.SelectionLength = 0;
+                            break;
+                        case "ICE":
+                            startIndex = richTextBoxInfo.Text.IndexOf(item, searchStart);
+                            target = item;
+                            richTextBoxInfo.Select(startIndex, target.Length);
+                            richTextBoxInfo.SelectionColor = Color.LightSkyBlue;
+                            richTextBoxInfo.SelectionLength = 0;
+                            break;
+                        case "FIGHTING":
+                            startIndex = richTextBoxInfo.Text.IndexOf(item, searchStart);
+                            target = item;
+                            richTextBoxInfo.Select(startIndex, target.Length);
+                            richTextBoxInfo.SelectionColor = Color.SaddleBrown;
+                            richTextBoxInfo.SelectionLength = 0;
+                            break;
+                        case "POISON":
+                            startIndex = richTextBoxInfo.Text.IndexOf(item, searchStart);
+                            target = item;
+                            richTextBoxInfo.Select(startIndex, target.Length);
+                            richTextBoxInfo.SelectionColor = Color.MediumVioletRed;
+                            richTextBoxInfo.SelectionLength = 0;
+                            break;
+                        case "GROUND":
+                            startIndex = richTextBoxInfo.Text.IndexOf(item, searchStart);
+                            target = item;
+                            richTextBoxInfo.Select(startIndex, target.Length);
+                            richTextBoxInfo.SelectionColor = Color.SandyBrown;
+                            richTextBoxInfo.SelectionLength = 0;
+                            break;
+                        case "FLYING":
+                            startIndex = richTextBoxInfo.Text.IndexOf(item, searchStart);
+                            target = item;
+                            richTextBoxInfo.Select(startIndex, target.Length);
+                            richTextBoxInfo.SelectionColor = Color.DeepSkyBlue;
+                            richTextBoxInfo.SelectionLength = 0;
+                            break;
+                        case "PSYCHIC":
+                            startIndex = richTextBoxInfo.Text.IndexOf(item, searchStart);
+                            target = item;
+                            richTextBoxInfo.Select(startIndex, target.Length);
+                            richTextBoxInfo.SelectionColor = Color.DeepPink;
+                            richTextBoxInfo.SelectionLength = 0;
+                            break;
+                        case "BUG":
+                            startIndex = richTextBoxInfo.Text.IndexOf(item, searchStart);
+                            target = item;
+                            richTextBoxInfo.Select(startIndex, target.Length);
+                            richTextBoxInfo.SelectionColor = Color.Olive;
+                            richTextBoxInfo.SelectionLength = 0;
+                            break;
+                        case "ROCK":
+                            startIndex = richTextBoxInfo.Text.IndexOf(item, searchStart);
+                            target = item;
+                            richTextBoxInfo.Select(startIndex, target.Length);
+                            richTextBoxInfo.SelectionColor = Color.Tan;
+                            richTextBoxInfo.SelectionLength = 0;
+                            break;
+                        case "GHOST":
+                            startIndex = richTextBoxInfo.Text.IndexOf(item, searchStart);
+                            target = item;
+                            richTextBoxInfo.Select(startIndex, target.Length);
+                            richTextBoxInfo.SelectionColor = Color.LightSlateGray;
+                            richTextBoxInfo.SelectionLength = 0;
+                            break;
+                        case "DRAGON":
+                            startIndex = richTextBoxInfo.Text.IndexOf(item, searchStart);
+                            target = item;
+                            richTextBoxInfo.Select(startIndex, target.Length);
+                            richTextBoxInfo.SelectionColor = Color.DodgerBlue;
+                            richTextBoxInfo.SelectionLength = 0;
+                            break;
+                        case "DARK":
+                            startIndex = richTextBoxInfo.Text.IndexOf(item, searchStart);
+                            target = item;
+                            richTextBoxInfo.Select(startIndex, target.Length);
+                            richTextBoxInfo.SelectionColor = Color.Maroon;
+                            richTextBoxInfo.SelectionLength = 0;
+                            break;
+                        case "STEEL":
+                            startIndex = richTextBoxInfo.Text.IndexOf(item, searchStart);
+                            target = item;
+                            richTextBoxInfo.Select(startIndex, target.Length);
+                            richTextBoxInfo.SelectionColor = Color.Silver;
+                            richTextBoxInfo.SelectionLength = 0;
+                            break;
+                        case "FAIRY":
+                            startIndex = richTextBoxInfo.Text.IndexOf(item, searchStart);
+                            target = item;
+                            richTextBoxInfo.Select(startIndex, target.Length);
+                            richTextBoxInfo.SelectionColor = Color.Violet;
+                            richTextBoxInfo.SelectionLength = 0;
+                            break;
+                        default:
+                            break;
+
+                    }
+                }
+            }
         }
 
         private void PokemonSpriteFetch(PokemonData? response)
@@ -174,7 +218,7 @@ namespace Pokedex
             }
             catch (NullReferenceException e)
             {
-                richTextBoxInfo.Text = $"Invalid name or ID!";
+                richTextBoxInfo.Text = invalidInputError;
                 ImageResetter();
             }
         }
@@ -242,7 +286,7 @@ namespace Pokedex
             }
             catch (NullReferenceException e)
             {
-                return $"Invalid name or ID!";
+                return invalidInputError;
             }
         }
         private void InitialString()
@@ -275,6 +319,7 @@ namespace Pokedex
             nextId += 1;
 
             richTextBoxInfo.Text = responseDisplay;
+            TypeColorSetter();
         }
 
         private async void buttonPrevious_Click(object sender, EventArgs e)
@@ -296,6 +341,7 @@ namespace Pokedex
             previousId -= 1;
 
             richTextBoxInfo.Text = responseDisplay;
+            TypeColorSetter();
         }
         private void ButtonInitialize()
         {
@@ -312,7 +358,7 @@ namespace Pokedex
                 buttonPrevious.Enabled = false;
                 buttonPrevious.Visible = false;
             }
-            else if (richTextBoxInfo.Text == "Invalid name or ID!")
+            else if (richTextBoxInfo.Text == invalidInputError)
             {
                 buttonNext.Enabled = false;
                 buttonNext.Visible = false;
@@ -371,7 +417,7 @@ namespace Pokedex
             }
             catch (NullReferenceException e)
             {
-                richTextBoxInfo.Text = $"Invalid name or ID!\r\n\r\nPokémon amount as of November 10th, 2026 is 1025.";
+                richTextBoxInfo.Text = invalidInputError;
             }
         }
         private void ImageResetter()
