@@ -63,6 +63,16 @@ namespace Pokedex.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap clker_free_vector_images_audio_297860_640 {
+            get {
+                object obj = ResourceManager.GetObject("clker-free-vector-images-audio-297860_640", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap no_pokemon_selected {
             get {
                 object obj = ResourceManager.GetObject("no_pokemon_selected", resourceCulture);

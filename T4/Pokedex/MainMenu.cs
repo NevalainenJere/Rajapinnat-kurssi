@@ -351,12 +351,16 @@ namespace Pokedex
                 $"Type:\r\n" +
                 $"Weight:\r\n" +
                 $"Height:\r\n" +
-                $"Stats\r\n")
+                $"Stats:\r\n")
             {
                 buttonNext.Enabled = false;
                 buttonNext.Visible = false;
                 buttonPrevious.Enabled = false;
                 buttonPrevious.Visible = false;
+                buttonCryLegacy.Enabled = false;
+                buttonCryLegacy.Visible = false;
+                buttonCryLatest.Enabled = false;
+                buttonCryLatest.Visible = false;
             }
             else if (richTextBoxInfo.Text == invalidInputError)
             {
@@ -364,6 +368,10 @@ namespace Pokedex
                 buttonNext.Visible = false;
                 buttonPrevious.Enabled = false;
                 buttonPrevious.Visible = false;
+                buttonCryLegacy.Enabled = false;
+                buttonCryLegacy.Visible = false;
+                buttonCryLatest.Enabled = false;
+                buttonCryLatest.Visible = false;
             }
         }
         private void ButtonRetrieve()
@@ -372,6 +380,10 @@ namespace Pokedex
             buttonNext.Visible = true;
             buttonPrevious.Enabled = true;
             buttonPrevious.Visible = true;
+            buttonCryLegacy.Enabled = true;
+            buttonCryLegacy.Visible = true;
+            buttonCryLatest.Enabled = true;
+            buttonCryLatest.Visible = true;
         }
         private async void ButtonTextSetter(PokemonData? response)
         {

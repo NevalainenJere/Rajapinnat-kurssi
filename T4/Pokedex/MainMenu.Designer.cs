@@ -38,6 +38,8 @@
             buttonPrevious = new Button();
             buttonNext = new Button();
             richTextBoxInfo = new RichTextBox();
+            buttonCryLegacy = new Button();
+            buttonCryLatest = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureNormal).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureShiny).BeginInit();
             SuspendLayout();
@@ -77,7 +79,7 @@
             // 
             pictureNormal.BackColor = Color.Firebrick;
             pictureNormal.Image = Properties.Resources.no_pokemon_selected;
-            pictureNormal.Location = new Point(53, 286);
+            pictureNormal.Location = new Point(34, 290);
             pictureNormal.Margin = new Padding(2);
             pictureNormal.Name = "pictureNormal";
             pictureNormal.Size = new Size(160, 160);
@@ -89,7 +91,7 @@
             // 
             pictureShiny.BackColor = Color.Firebrick;
             pictureShiny.Image = Properties.Resources.no_pokemon_selected;
-            pictureShiny.Location = new Point(278, 286);
+            pictureShiny.Location = new Point(219, 290);
             pictureShiny.Margin = new Padding(2);
             pictureShiny.Name = "pictureShiny";
             pictureShiny.Size = new Size(160, 160);
@@ -102,7 +104,7 @@
             labelNormal.AutoSize = true;
             labelNormal.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             labelNormal.ForeColor = Color.White;
-            labelNormal.Location = new Point(53, 259);
+            labelNormal.Location = new Point(34, 263);
             labelNormal.Margin = new Padding(2, 0, 2, 0);
             labelNormal.Name = "labelNormal";
             labelNormal.Size = new Size(84, 25);
@@ -114,7 +116,7 @@
             labelShiny.AutoSize = true;
             labelShiny.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             labelShiny.ForeColor = Color.White;
-            labelShiny.Location = new Point(278, 259);
+            labelShiny.Location = new Point(219, 263);
             labelShiny.Margin = new Padding(2, 0, 2, 0);
             labelShiny.Name = "labelShiny";
             labelShiny.Size = new Size(66, 25);
@@ -124,7 +126,7 @@
             // buttonPrevious
             // 
             buttonPrevious.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            buttonPrevious.Location = new Point(498, 286);
+            buttonPrevious.Location = new Point(517, 290);
             buttonPrevious.Margin = new Padding(2);
             buttonPrevious.Name = "buttonPrevious";
             buttonPrevious.Size = new Size(235, 70);
@@ -136,7 +138,7 @@
             // buttonNext
             // 
             buttonNext.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            buttonNext.Location = new Point(498, 375);
+            buttonNext.Location = new Point(517, 379);
             buttonNext.Margin = new Padding(2);
             buttonNext.Name = "buttonNext";
             buttonNext.Size = new Size(235, 70);
@@ -155,12 +157,32 @@
             richTextBoxInfo.Text = "";
             richTextBoxInfo.Enter += richTextBoxInfo_Enter;
             // 
+            // buttonCryLegacy
+            // 
+            buttonCryLegacy.Image = Properties.Resources.clker_free_vector_images_audio_297860_640;
+            buttonCryLegacy.Location = new Point(411, 290);
+            buttonCryLegacy.Name = "buttonCryLegacy";
+            buttonCryLegacy.Size = new Size(75, 75);
+            buttonCryLegacy.TabIndex = 8;
+            buttonCryLegacy.UseVisualStyleBackColor = true;
+            // 
+            // buttonCryLatest
+            // 
+            buttonCryLatest.Image = Properties.Resources.clker_free_vector_images_audio_297860_640;
+            buttonCryLatest.Location = new Point(411, 375);
+            buttonCryLatest.Name = "buttonCryLatest";
+            buttonCryLatest.Size = new Size(75, 75);
+            buttonCryLatest.TabIndex = 8;
+            buttonCryLatest.UseVisualStyleBackColor = true;
+            // 
             // MainMenu
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Firebrick;
             ClientSize = new Size(776, 466);
+            Controls.Add(buttonCryLatest);
+            Controls.Add(buttonCryLegacy);
             Controls.Add(richTextBoxInfo);
             Controls.Add(buttonNext);
             Controls.Add(buttonPrevious);
@@ -172,6 +194,7 @@
             Controls.Add(labelSearch);
             Controls.Add(textBoxSearch);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "MainMenu";
             Text = "Pokédex Desktop";
             ((System.ComponentModel.ISupportInitialize)pictureNormal).EndInit();
@@ -192,5 +215,7 @@
         private Button buttonPrevious;
         private Button buttonNext;
         private RichTextBox richTextBoxInfo;
+        private Button buttonCryLegacy;
+        private Button buttonCryLatest;
     }
 }
