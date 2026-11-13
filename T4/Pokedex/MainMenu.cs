@@ -1,6 +1,9 @@
 using Newtonsoft.Json;
+using System.Media;
 using System.Net;
 using System.Runtime.CompilerServices;
+using NAudio.Vorbis;
+using NAudio.Wave;
 
 namespace Pokedex
 {
@@ -9,6 +12,7 @@ namespace Pokedex
         private static readonly HttpClient client = new HttpClient();
         PokemonData pokeData = new PokemonData();
         Type1 pokeType1 = new Type1();
+        PokemonData? response;
         int nextId;
         int previousId;
         string pokemonTypes;
@@ -30,7 +34,7 @@ namespace Pokedex
                 var endpoint = new Uri("https://pokeapi.co/api/v2/pokemon/" + search);
                 var httpRequest = await client.GetAsync(endpoint);
                 var result = await httpRequest.Content.ReadAsStringAsync();
-                var response = JsonConvert.DeserializeObject<PokemonData>(result);
+                response = JsonConvert.DeserializeObject<PokemonData>(result);
                 string responseDisplay = PokemonDataString(response);
 
                 PokemonSpriteFetch(response);
@@ -222,7 +226,7 @@ namespace Pokedex
                 ImageResetter();
             }
         }
-        private  string PokemonDataString(PokemonData? response)
+        private string PokemonDataString(PokemonData? response)
         {
 
             try
@@ -308,7 +312,7 @@ namespace Pokedex
 
             var result = await httpRequest.Content.ReadAsStringAsync();
 
-            var response = JsonConvert.DeserializeObject<PokemonData>(result);
+            response = JsonConvert.DeserializeObject<PokemonData>(result);
 
             string responseDisplay = PokemonDataString(response);
             PokemonSpriteFetch(response);
@@ -330,7 +334,7 @@ namespace Pokedex
 
             var result = await httpRequest.Content.ReadAsStringAsync();
 
-            var response = JsonConvert.DeserializeObject<PokemonData>(result);
+            response = JsonConvert.DeserializeObject<PokemonData>(result);
 
             string responseDisplay = PokemonDataString(response);
             PokemonSpriteFetch(response);
@@ -448,6 +452,74 @@ namespace Pokedex
         private void richTextBoxInfo_Enter(object sender, EventArgs e)
         {
             ActiveControl = buttonSearch;
+        }
+
+        private void buttonCryLegacy_Click(object sender, EventArgs e)
+        {
+            AudioPlayerLegacy(response);
+        }
+
+        private void buttonCryLatest_Click(object sender, EventArgs e)
+        {
+            AudioPlayerLatest(response);
+        }
+        private async static void AudioPlayerLegacy(PokemonData? response)
+        {
+            try
+            {
+                if (response?.cries?.legacy == null)
+                    return;
+
+                string audioUrl = response.cries.legacy;
+                using var httpClient = new HttpClient();
+                using var stream = await httpClient.GetStreamAsync(audioUrl);
+                using var ms = new MemoryStream();
+                await stream.CopyToAsync(ms);
+                ms.Position = 0;
+                using var reader = new NAudio.Vorbis.VorbisWaveReader(ms);
+                using var player = new NAudio.Wave.WaveOutEvent();
+                player.Init(reader);
+                player.Play();
+                // Wait for playback to finish
+                while (player.PlaybackState == PlaybackState.Playing)
+                {
+                    await Task.Delay(100);
+                }
+            }
+            catch
+            {
+
+            }
+            
+        }
+        private async static void AudioPlayerLatest(PokemonData? response)
+        {
+            try
+            {
+                if (response?.cries?.latest == null)
+                    return;
+
+                string audioUrl = response.cries.latest;
+                using var httpClient = new HttpClient();
+                using var stream = await httpClient.GetStreamAsync(audioUrl);
+                using var ms = new MemoryStream();
+                await stream.CopyToAsync(ms);
+                ms.Position = 0;
+                using var reader = new NAudio.Vorbis.VorbisWaveReader(ms);
+                using var player = new NAudio.Wave.WaveOutEvent();
+                player.Init(reader);
+                player.Play();
+                // Wait for playback to finish
+                while (player.PlaybackState == PlaybackState.Playing)
+                {
+                    await Task.Delay(100);
+                }
+            }
+            catch
+            {
+                return;
+            }
+            
         }
     }
 }

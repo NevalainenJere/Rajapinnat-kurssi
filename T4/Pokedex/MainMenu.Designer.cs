@@ -165,6 +165,7 @@
             buttonCryLegacy.Size = new Size(75, 75);
             buttonCryLegacy.TabIndex = 8;
             buttonCryLegacy.UseVisualStyleBackColor = true;
+            buttonCryLegacy.Click += buttonCryLegacy_Click;
             // 
             // buttonCryLatest
             // 
@@ -174,6 +175,7 @@
             buttonCryLatest.Size = new Size(75, 75);
             buttonCryLatest.TabIndex = 8;
             buttonCryLatest.UseVisualStyleBackColor = true;
+            buttonCryLatest.Click += buttonCryLatest_Click;
             // 
             // MainMenu
             // 

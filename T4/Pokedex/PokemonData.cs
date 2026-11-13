@@ -25,7 +25,7 @@ namespace Pokedex
         //public Move[] moves { get; set; }
         //public Species species { get; set; }
         public Sprites sprites { get; set; }
-        //public Cries cries { get; set; }
+        public Cries cries { get; set; }
         public Stat[] stats { get; set; }
         //public Past_Stats[] past_stats { get; set; }
         public Type[] types { get; set; }
