@@ -495,8 +495,11 @@ namespace Pokedex
             try
             {
                 if (response?.cries?.legacy == null)
+                {
+                    MessageBox.Show("No Legacy cry located.");
                     return;
-
+                }
+                    
                 string audioUrl = response.cries.legacy;
                 using var httpClient = new HttpClient();
                 using var stream = await httpClient.GetStreamAsync(audioUrl);
@@ -506,7 +509,9 @@ namespace Pokedex
                 using var reader = new NAudio.Vorbis.VorbisWaveReader(ms);
                 using var player = new NAudio.Wave.WaveOutEvent();
                 player.Init(reader);
+                player.Volume = 0.3f;
                 player.Play();
+
                 // Wait for playback to finish
                 while (player.PlaybackState == PlaybackState.Playing)
                 {
@@ -524,8 +529,11 @@ namespace Pokedex
             try
             {
                 if (response?.cries?.latest == null)
+                {
+                    MessageBox.Show("No Legacy cry located.");
                     return;
-
+                }
+                    
                 string audioUrl = response.cries.latest;
                 using var httpClient = new HttpClient();
                 using var stream = await httpClient.GetStreamAsync(audioUrl);
@@ -535,7 +543,9 @@ namespace Pokedex
                 using var reader = new NAudio.Vorbis.VorbisWaveReader(ms);
                 using var player = new NAudio.Wave.WaveOutEvent();
                 player.Init(reader);
+                player.Volume = 0.3f;
                 player.Play();
+
                 // Wait for playback to finish
                 while (player.PlaybackState == PlaybackState.Playing)
                 {
