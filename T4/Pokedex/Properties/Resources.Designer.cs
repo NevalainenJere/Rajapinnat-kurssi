@@ -73,6 +73,16 @@ namespace Pokedex.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap form_background {
+            get {
+                object obj = ResourceManager.GetObject("form_background", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap no_pokemon_selected {
             get {
                 object obj = ResourceManager.GetObject("no_pokemon_selected", resourceCulture);

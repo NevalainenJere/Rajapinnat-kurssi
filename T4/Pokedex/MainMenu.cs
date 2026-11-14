@@ -1,9 +1,10 @@
+using NAudio.Vorbis;
+using NAudio.Wave;
 using Newtonsoft.Json;
 using System.Media;
 using System.Net;
 using System.Runtime.CompilerServices;
-using NAudio.Vorbis;
-using NAudio.Wave;
+using System.Windows.Forms;
 
 namespace Pokedex
 {
@@ -16,11 +17,22 @@ namespace Pokedex
         int nextId;
         int previousId;
         string pokemonTypes;
+        string pokemonAbilities;
         string invalidInputError = $"Invalid name or ID!\r\n\r\nPokémon amount as of November 13th, 2026 is 1025.";
+        string audioMissing = $"Sound file missing. :(";
+        string initialDisplayString =
+                $"Name:\r\n" +
+                $"Id:\r\n" +
+                $"Type:\r\n" +
+                $"Weight:\r\n" +
+                $"Height:\r\n" +
+                $"Stats:\r\n" +
+                $"Abilities:\r\n";
 
         public MainMenu()
         {
             InitializeComponent();
+            AlignElements();
             InitialString();
             ButtonInitialize();
         }
@@ -81,6 +93,7 @@ namespace Pokedex
                             target = item;
                             richTextBoxInfo.Select(startIndex, target.Length);
                             richTextBoxInfo.SelectionColor = Color.Gray;
+
                             richTextBoxInfo.SelectionLength = 0;
                             break;
                         case "FIRE":
@@ -101,7 +114,7 @@ namespace Pokedex
                             startIndex = richTextBoxInfo.Text.IndexOf(item, searchStart);
                             target = item;
                             richTextBoxInfo.Select(startIndex, target.Length);
-                            richTextBoxInfo.SelectionColor = Color.Gold;
+                            richTextBoxInfo.SelectionColor = Color.Orange;
                             richTextBoxInfo.SelectionLength = 0;
                             break;
                         case "GRASS":
@@ -233,7 +246,10 @@ namespace Pokedex
             {
                 List<string> typesToStringList = new List<string>();
                 List<string> statsToStringList = new List<string>();
+                List<string> abilitiesToStringList = new List<string>();
+                List<string> pastAbilitiesToStringList = new List<string>();
                 pokemonTypes = "";
+                pokemonAbilities = "";
                 string pokemonStats = "";
 
                 string pokemonName = response.name;
@@ -280,13 +296,30 @@ namespace Pokedex
                         pokemonStats += $"{statsToStringList[i]}: ";
                     }
                 }
+                foreach (var pokeAbility in response.abilities)
+                {
+                    abilitiesToStringList.Add(pokeAbility.ability.name);
+                }
+                for (int i = 0; i < abilitiesToStringList.Count; i++)
+                {
+                    if (i == abilitiesToStringList.Count - 1)
+                    {
+                        pokemonAbilities += $"{abilitiesToStringList[i]}";
+                        pokemonAbilities = pokemonAbilities;
+                    }
+                    else
+                    {
+                        pokemonAbilities += $"{abilitiesToStringList[i]}, ";
+                    }
+                }
                 return
                     $"Name: {pokemonName.ToUpper()}\r\n" +
                     $"Id: {pokemonId}\r\n" +
                     $"Type: {pokemonTypes.ToUpper()}\r\n" +
                     $"Weight: {pokemonWeight}\r\n" +
                     $"Height: {pokemonHeight}\r\n" +
-                    $"Stats: {pokemonStats.ToUpper()}\r\n";
+                    $"Stats: {pokemonStats.ToUpper()}\r\n" +
+                    $"Abilities: {pokemonAbilities.ToUpper()}\r\n";
             }
             catch (NullReferenceException e)
             {
@@ -295,13 +328,7 @@ namespace Pokedex
         }
         private void InitialString()
         {
-            richTextBoxInfo.Text =
-                $"Name:\r\n" +
-                $"Id:\r\n" +
-                $"Type:\r\n" +
-                $"Weight:\r\n" +
-                $"Height:\r\n" +
-                $"Stats:\r\n";
+            richTextBoxInfo.Text = initialDisplayString;
         }
 
         private async void buttonNext_Click(object sender, EventArgs e)
@@ -349,13 +376,7 @@ namespace Pokedex
         }
         private void ButtonInitialize()
         {
-            if (richTextBoxInfo.Text ==
-                $"Name:\r\n" +
-                $"Id:\r\n" +
-                $"Type:\r\n" +
-                $"Weight:\r\n" +
-                $"Height:\r\n" +
-                $"Stats:\r\n")
+            if (richTextBoxInfo.Text == initialDisplayString)
             {
                 buttonNext.Enabled = false;
                 buttonNext.Visible = false;
@@ -365,6 +386,8 @@ namespace Pokedex
                 buttonCryLegacy.Visible = false;
                 buttonCryLatest.Enabled = false;
                 buttonCryLatest.Visible = false;
+                labelCryLegacy.Visible = false;
+                labelCryLatest.Visible = false;
             }
             else if (richTextBoxInfo.Text == invalidInputError)
             {
@@ -376,6 +399,8 @@ namespace Pokedex
                 buttonCryLegacy.Visible = false;
                 buttonCryLatest.Enabled = false;
                 buttonCryLatest.Visible = false;
+                labelCryLegacy.Visible = false;
+                labelCryLatest.Visible = false;
             }
         }
         private void ButtonRetrieve()
@@ -388,6 +413,8 @@ namespace Pokedex
             buttonCryLegacy.Visible = true;
             buttonCryLatest.Enabled = true;
             buttonCryLatest.Visible = true;
+            labelCryLegacy.Visible = true;
+            labelCryLatest.Visible = true;
         }
         private async void ButtonTextSetter(PokemonData? response)
         {
@@ -463,7 +490,7 @@ namespace Pokedex
         {
             AudioPlayerLatest(response);
         }
-        private async static void AudioPlayerLegacy(PokemonData? response)
+        private async void AudioPlayerLegacy(PokemonData? response)
         {
             try
             {
@@ -488,11 +515,11 @@ namespace Pokedex
             }
             catch
             {
-
+                MessageBox.Show(audioMissing);
             }
             
         }
-        private async static void AudioPlayerLatest(PokemonData? response)
+        private async void AudioPlayerLatest(PokemonData? response)
         {
             try
             {
@@ -517,9 +544,15 @@ namespace Pokedex
             }
             catch
             {
-                return;
+                MessageBox.Show(audioMissing);
             }
             
+        }
+        private void AlignElements()
+        {
+            richTextBoxInfo.Left = (this.ClientSize.Width - richTextBoxInfo.Width) / 2;
+            labelSearch.Left = richTextBoxInfo.Left;
+            buttonSearch.Left = richTextBoxInfo.Right - buttonSearch.Width;
         }
     }
 }

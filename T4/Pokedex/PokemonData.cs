@@ -16,7 +16,7 @@ namespace Pokedex
         //public bool is_default { get; set; }
         //public int order { get; set; }
         public int weight { get; set; }
-        //public Ability[] abilities { get; set; }
+        public Ability[] abilities { get; set; }
         //public Past_Abilities[] past_abilities { get; set; }
         //public PokemonForm[] forms { get; set; }
         //public Game_Indices[] game_indices { get; set; }
