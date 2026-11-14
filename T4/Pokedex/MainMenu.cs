@@ -18,7 +18,7 @@ namespace Pokedex
         int previousId;
         string pokemonTypes;
         string pokemonAbilities;
-        string invalidInputError = $"Invalid name or ID!\r\n\r\nPokémon amount as of November 13th, 2026 is 1025.";
+        string invalidInputError = $"Invalid name or ID!\r\n\r\nPokémon amount as of November 14th, 2026 is 1025.";
         string audioMissing = $"Sound file missing. :(";
         string initialDisplayString =
                 $"Name:\r\n" +
@@ -64,7 +64,7 @@ namespace Pokedex
                     ButtonInitialize();
                 }
             }
-            catch (NullReferenceException)
+            catch
             {
                 richTextBoxInfo.Text = invalidInputError;
                 ButtonInitialize();
