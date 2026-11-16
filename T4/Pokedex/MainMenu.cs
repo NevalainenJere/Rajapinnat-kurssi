@@ -10,7 +10,7 @@ namespace Pokedex
 {
     public partial class MainMenu : Form
     {
-        private static readonly HttpClient client = new HttpClient();
+        private static readonly HttpClient client = new();
         PokemonData pokeData = new PokemonData();
         Type1 pokeType1 = new Type1();
         PokemonData? response;
@@ -18,7 +18,7 @@ namespace Pokedex
         int previousId;
         string pokemonTypes;
         string pokemonAbilities;
-        string invalidInputError = $"Invalid name or ID!\r\n\r\nPokémon amount as of November 14th, 2026 is 1025.";
+        string invalidInputError = $"Invalid name or ID!\r\n\r\nPokémon amount as of November 16th, 2026 is 1025.";
         string audioMissing = $"Sound file missing. :(";
         string initialDisplayString =
                 $"Name:\r\n" +
@@ -50,8 +50,16 @@ namespace Pokedex
                 string responseDisplay = PokemonDataString(response);
 
                 PokemonSpriteFetch(response);
-                ButtonRetrieve();
-                ButtonTextSetter(response);
+
+                if (response.name != null)
+                {
+                    ButtonRetrieve();
+                    ButtonTextSetter(response);
+                }
+                else
+                {
+                    ErrorElementInitialize();
+                }
 
                 richTextBoxInfo.Text = responseDisplay;
                 TypeColorSetter();
@@ -59,14 +67,15 @@ namespace Pokedex
                 nextId = response.id + 1;
                 previousId = response.id - 1;
 
-                if (richTextBoxInfo.Text == invalidInputError)
-                {
-                    ButtonInitialize();
-                }
+                //if (richTextBoxInfo.Text == invalidInputError)
+                //{
+                //    ErrorElementInitialize();
+                //}
             }
             catch
             {
                 richTextBoxInfo.Text = invalidInputError;
+                ErrorElementInitialize();
                 ButtonInitialize();
             }
 
@@ -236,7 +245,7 @@ namespace Pokedex
             catch (NullReferenceException e)
             {
                 richTextBoxInfo.Text = invalidInputError;
-                ImageResetter();
+                ErrorElementInitialize();
             }
         }
         private string PokemonDataString(PokemonData? response)
@@ -323,6 +332,7 @@ namespace Pokedex
             }
             catch (NullReferenceException e)
             {
+                ErrorElementInitialize();
                 return invalidInputError;
             }
         }
@@ -376,32 +386,30 @@ namespace Pokedex
         }
         private void ButtonInitialize()
         {
-            if (richTextBoxInfo.Text == initialDisplayString)
-            {
-                buttonNext.Enabled = false;
-                buttonNext.Visible = false;
-                buttonPrevious.Enabled = false;
-                buttonPrevious.Visible = false;
-                buttonCryLegacy.Enabled = false;
-                buttonCryLegacy.Visible = false;
-                buttonCryLatest.Enabled = false;
-                buttonCryLatest.Visible = false;
-                labelCryLegacy.Visible = false;
-                labelCryLatest.Visible = false;
-            }
-            else if (richTextBoxInfo.Text == invalidInputError)
-            {
-                buttonNext.Enabled = false;
-                buttonNext.Visible = false;
-                buttonPrevious.Enabled = false;
-                buttonPrevious.Visible = false;
-                buttonCryLegacy.Enabled = false;
-                buttonCryLegacy.Visible = false;
-                buttonCryLatest.Enabled = false;
-                buttonCryLatest.Visible = false;
-                labelCryLegacy.Visible = false;
-                labelCryLatest.Visible = false;
-            }
+            buttonNext.Enabled = false;
+            buttonNext.Visible = false;
+            buttonPrevious.Enabled = false;
+            buttonPrevious.Visible = false;
+            buttonCryLegacy.Enabled = false;
+            buttonCryLegacy.Visible = false;
+            buttonCryLatest.Enabled = false;
+            buttonCryLatest.Visible = false;
+            labelCryLegacy.Visible = false;
+            labelCryLatest.Visible = false;
+
+            //else if (richTextBoxInfo.Text == invalidInputError)
+            //{
+            //    buttonNext.Enabled = false;
+            //    buttonNext.Visible = false;
+            //    buttonPrevious.Enabled = false;
+            //    buttonPrevious.Visible = false;
+            //    buttonCryLegacy.Enabled = false;
+            //    buttonCryLegacy.Visible = false;
+            //    buttonCryLatest.Enabled = false;
+            //    buttonCryLatest.Visible = false;
+            //    labelCryLegacy.Visible = false;
+            //    labelCryLatest.Visible = false;
+            //}
         }
         private void ButtonRetrieve()
         {
@@ -460,6 +468,7 @@ namespace Pokedex
             }
             catch (NullReferenceException e)
             {
+                ErrorElementInitialize();
                 richTextBoxInfo.Text = invalidInputError;
             }
         }
@@ -499,7 +508,7 @@ namespace Pokedex
                     MessageBox.Show("No Legacy cry located.");
                     return;
                 }
-                    
+
                 string audioUrl = response.cries.legacy;
                 using var httpClient = new HttpClient();
                 using var stream = await httpClient.GetStreamAsync(audioUrl);
@@ -522,7 +531,7 @@ namespace Pokedex
             {
                 MessageBox.Show(audioMissing);
             }
-            
+
         }
         private async void AudioPlayerLatest(PokemonData? response)
         {
@@ -533,7 +542,7 @@ namespace Pokedex
                     MessageBox.Show("No Legacy cry located.");
                     return;
                 }
-                    
+
                 string audioUrl = response.cries.latest;
                 using var httpClient = new HttpClient();
                 using var stream = await httpClient.GetStreamAsync(audioUrl);
@@ -556,7 +565,7 @@ namespace Pokedex
             {
                 MessageBox.Show(audioMissing);
             }
-            
+
         }
         private void AlignElements()
         {
@@ -564,5 +573,11 @@ namespace Pokedex
             labelSearch.Left = richTextBoxInfo.Left;
             buttonSearch.Left = richTextBoxInfo.Right - buttonSearch.Width;
         }
+        private void ErrorElementInitialize()
+        {
+            ButtonInitialize();
+            ImageResetter();
+        }
+
     }
 }
