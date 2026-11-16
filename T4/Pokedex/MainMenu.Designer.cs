@@ -49,21 +49,20 @@
             // 
             // textBoxSearch
             // 
-            textBoxSearch.Location = new Point(372, 32);
+            textBoxSearch.Location = new Point(430, 32);
             textBoxSearch.Name = "textBoxSearch";
-            textBoxSearch.Size = new Size(522, 27);
+            textBoxSearch.Size = new Size(522, 31);
             textBoxSearch.TabIndex = 0;
             textBoxSearch.KeyDown += textBoxSearch_KeyDown;
             // 
             // labelSearch
             // 
-            labelSearch.AutoSize = true;
             labelSearch.BackColor = Color.Transparent;
             labelSearch.Font = new Font("Calibri", 12F, FontStyle.Bold);
             labelSearch.ForeColor = Color.White;
             labelSearch.Location = new Point(75, 32);
             labelSearch.Name = "labelSearch";
-            labelSearch.Size = new Size(276, 24);
+            labelSearch.Size = new Size(328, 24);
             labelSearch.TabIndex = 2;
             labelSearch.Text = "Hae Pokémon nimellä tai ID:llä:";
             // 
@@ -71,7 +70,7 @@
             // 
             buttonSearch.BackColor = Color.Gold;
             buttonSearch.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            buttonSearch.Location = new Point(913, 30);
+            buttonSearch.Location = new Point(971, 30);
             buttonSearch.Name = "buttonSearch";
             buttonSearch.Size = new Size(94, 29);
             buttonSearch.TabIndex = 3;
@@ -83,7 +82,7 @@
             // 
             pictureNormal.BackColor = Color.Transparent;
             pictureNormal.Image = Properties.Resources.no_pokemon_selected;
-            pictureNormal.Location = new Point(36, 490);
+            pictureNormal.Location = new Point(55, 522);
             pictureNormal.Margin = new Padding(2);
             pictureNormal.Name = "pictureNormal";
             pictureNormal.Size = new Size(195, 179);
@@ -95,7 +94,7 @@
             // 
             pictureShiny.BackColor = Color.Transparent;
             pictureShiny.Image = Properties.Resources.no_pokemon_selected;
-            pictureShiny.Location = new Point(282, 490);
+            pictureShiny.Location = new Point(301, 522);
             pictureShiny.Margin = new Padding(2);
             pictureShiny.Name = "pictureShiny";
             pictureShiny.Size = new Size(195, 179);
@@ -109,10 +108,10 @@
             labelNormal.BackColor = Color.Transparent;
             labelNormal.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             labelNormal.ForeColor = Color.Black;
-            labelNormal.Location = new Point(31, 458);
+            labelNormal.Location = new Point(50, 490);
             labelNormal.Margin = new Padding(2, 0, 2, 0);
             labelNormal.Name = "labelNormal";
-            labelNormal.Size = new Size(88, 28);
+            labelNormal.Size = new Size(107, 32);
             labelNormal.TabIndex = 5;
             labelNormal.Text = "Normal:";
             // 
@@ -122,17 +121,17 @@
             labelShiny.BackColor = Color.Transparent;
             labelShiny.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             labelShiny.ForeColor = Color.Black;
-            labelShiny.Location = new Point(278, 458);
+            labelShiny.Location = new Point(297, 490);
             labelShiny.Margin = new Padding(2, 0, 2, 0);
             labelShiny.Name = "labelShiny";
-            labelShiny.Size = new Size(69, 28);
+            labelShiny.Size = new Size(83, 32);
             labelShiny.TabIndex = 5;
             labelShiny.Text = "Shiny:";
             // 
             // buttonPrevious
             // 
             buttonPrevious.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            buttonPrevious.Location = new Point(1016, 447);
+            buttonPrevious.Location = new Point(1016, 500);
             buttonPrevious.Margin = new Padding(2);
             buttonPrevious.Name = "buttonPrevious";
             buttonPrevious.Size = new Size(264, 100);
@@ -144,7 +143,7 @@
             // buttonNext
             // 
             buttonNext.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            buttonNext.Location = new Point(1016, 569);
+            buttonNext.Location = new Point(1016, 622);
             buttonNext.Margin = new Padding(2);
             buttonNext.Name = "buttonNext";
             buttonNext.Size = new Size(264, 100);
@@ -155,10 +154,11 @@
             // 
             // richTextBoxInfo
             // 
-            richTextBoxInfo.Font = new Font("Calibri", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            richTextBoxInfo.Font = new Font("Calibri", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
             richTextBoxInfo.Location = new Point(75, 74);
             richTextBoxInfo.Name = "richTextBoxInfo";
             richTextBoxInfo.ReadOnly = true;
+            richTextBoxInfo.ScrollBars = RichTextBoxScrollBars.None;
             richTextBoxInfo.Size = new Size(1164, 282);
             richTextBoxInfo.TabIndex = 7;
             richTextBoxInfo.Text = "";
@@ -169,7 +169,7 @@
             buttonCryLegacy.FlatAppearance.BorderColor = Color.Black;
             buttonCryLegacy.FlatAppearance.BorderSize = 4;
             buttonCryLegacy.Image = Properties.Resources.clker_free_vector_images_audio_297860_640;
-            buttonCryLegacy.Location = new Point(607, 545);
+            buttonCryLegacy.Location = new Point(620, 575);
             buttonCryLegacy.Name = "buttonCryLegacy";
             buttonCryLegacy.Size = new Size(100, 100);
             buttonCryLegacy.TabIndex = 8;
@@ -181,7 +181,7 @@
             buttonCryLatest.FlatAppearance.BorderColor = Color.Black;
             buttonCryLatest.FlatAppearance.BorderSize = 4;
             buttonCryLatest.Image = Properties.Resources.clker_free_vector_images_audio_297860_640;
-            buttonCryLatest.Location = new Point(782, 545);
+            buttonCryLatest.Location = new Point(795, 575);
             buttonCryLatest.Name = "buttonCryLatest";
             buttonCryLatest.Size = new Size(100, 100);
             buttonCryLatest.TabIndex = 8;
@@ -193,10 +193,10 @@
             labelCryLegacy.AutoSize = true;
             labelCryLegacy.BackColor = Color.Transparent;
             labelCryLegacy.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            labelCryLegacy.Location = new Point(592, 514);
+            labelCryLegacy.Location = new Point(598, 540);
             labelCryLegacy.Margin = new Padding(2, 0, 2, 0);
             labelCryLegacy.Name = "labelCryLegacy";
-            labelCryLegacy.Size = new Size(129, 28);
+            labelCryLegacy.Size = new Size(156, 32);
             labelCryLegacy.TabIndex = 9;
             labelCryLegacy.Text = "Cry (Legacy)";
             // 
@@ -205,10 +205,10 @@
             labelCryLatest.AutoSize = true;
             labelCryLatest.BackColor = Color.Transparent;
             labelCryLatest.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            labelCryLatest.Location = new Point(772, 514);
+            labelCryLatest.Location = new Point(774, 540);
             labelCryLatest.Margin = new Padding(2, 0, 2, 0);
             labelCryLatest.Name = "labelCryLatest";
-            labelCryLatest.Size = new Size(121, 28);
+            labelCryLatest.Size = new Size(145, 32);
             labelCryLatest.TabIndex = 9;
             labelCryLatest.Text = "Cry (Latest)";
             // 
@@ -217,7 +217,7 @@
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.Firebrick;
             BackgroundImage = Properties.Resources.form_background;
-            ClientSize = new Size(1322, 721);
+            ClientSize = new Size(1340, 768);
             Controls.Add(labelCryLatest);
             Controls.Add(labelCryLegacy);
             Controls.Add(buttonCryLatest);
