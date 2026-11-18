@@ -14,6 +14,9 @@ namespace Pokedex
         PokemonData pokeData = new PokemonData();
         Type1 pokeType1 = new Type1();
         PokemonData? response;
+        string abilityResponseDisplay1;
+        string abilityResponseDisplay2;
+        string abilityResponseDisplay3;
         int nextId;
         int previousId;
         string pokemonTypes;
@@ -256,7 +259,6 @@ namespace Pokedex
                 List<string> typesToStringList = new List<string>();
                 List<string> statsToStringList = new List<string>();
                 List<string> abilitiesToStringList = new List<string>();
-                List<string> pastAbilitiesToStringList = new List<string>();
                 pokemonTypes = "";
                 pokemonAbilities = "";
                 string pokemonStats = "";
@@ -321,6 +323,9 @@ namespace Pokedex
                         pokemonAbilities += $"{abilitiesToStringList[i]}, ";
                     }
                 }
+
+                AbilityButtonSetter(abilitiesToStringList);
+
                 return
                     $"Name: {pokemonName.ToUpper()}\r\n" +
                     $"Id: {pokemonId}\r\n" +
@@ -329,6 +334,7 @@ namespace Pokedex
                     $"Height: {pokemonHeight}\r\n" +
                     $"Stats: {pokemonStats.ToUpper()}\r\n" +
                     $"Abilities: {pokemonAbilities.ToUpper()}\r\n";
+
             }
             catch (NullReferenceException e)
             {
@@ -396,6 +402,12 @@ namespace Pokedex
             buttonCryLatest.Visible = false;
             labelCryLegacy.Visible = false;
             labelCryLatest.Visible = false;
+            buttonAbility1.Enabled = false;
+            buttonAbility1.Visible = false;
+            buttonAbility2.Enabled = false;
+            buttonAbility2.Visible = false;
+            buttonAbility3.Enabled = false;
+            buttonAbility3.Visible = false;
 
             //else if (richTextBoxInfo.Text == invalidInputError)
             //{
@@ -572,12 +584,103 @@ namespace Pokedex
             richTextBoxInfo.Left = (this.ClientSize.Width - richTextBoxInfo.Width) / 2;
             labelSearch.Left = richTextBoxInfo.Left;
             buttonSearch.Left = richTextBoxInfo.Right - buttonSearch.Width;
+            buttonAbility2.Left = buttonAbility1.Left + 150;
+            buttonAbility3.Left = buttonAbility2.Left + 150;
         }
         private void ErrorElementInitialize()
         {
             ButtonInitialize();
             ImageResetter();
         }
+        private void AbilityButtonSetter(List<string> abilitiesList)
+        {
+            try
+            {
+                if (abilitiesList.Count == 1)
+                {
+                    AbilityRequest(abilitiesList[0], null, null);
 
+                    buttonAbility1.Text = abilitiesList[0].ToUpper();
+                    buttonAbility1.Enabled = true;
+                    buttonAbility1.Visible = true;
+                    buttonAbility2.Enabled = false;
+                    buttonAbility2.Visible = false;
+                }
+                else if (abilitiesList.Count == 2)
+                {
+                    AbilityRequest(abilitiesList[0], abilitiesList[1], null);
+
+                    buttonAbility1.Text = abilitiesList[0].ToUpper();
+                    buttonAbility2.Text = abilitiesList[1].ToUpper();
+                    buttonAbility1.Enabled = true;
+                    buttonAbility1.Visible = true;
+                    buttonAbility2.Enabled = true;
+                    buttonAbility2.Visible = true;
+                    buttonAbility3.Enabled = false;
+                    buttonAbility3.Visible = false;
+                }
+                else
+                {
+                    AbilityRequest(abilitiesList[0], abilitiesList[1], abilitiesList[2]);
+
+                    buttonAbility1.Text = abilitiesList[0].ToUpper();
+                    buttonAbility2.Text = abilitiesList[1].ToUpper();
+                    buttonAbility3.Text = abilitiesList[2].ToUpper();
+                    buttonAbility1.Enabled = true;
+                    buttonAbility1.Visible = true;
+                    buttonAbility2.Enabled = true;
+                    buttonAbility2.Visible = true;
+                    buttonAbility3.Enabled = true;
+                    buttonAbility3.Visible = true;
+                }
+            }
+            catch
+            {
+                richTextBoxInfo.Text = invalidInputError;
+            }
+
+        }
+
+        private void buttonAbility1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(abilityResponseDisplay1);
+        }
+
+        private void buttonAbility2_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(abilityResponseDisplay2);
+        }
+
+        private void buttonAbility3_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(abilityResponseDisplay3);
+
+        }
+        private async void AbilityRequest(string? ability1, string? ability2, string? ability3)
+        {
+            PokemonData response1 = new();
+            PokemonData response2 = new();
+            PokemonData response3 = new();
+
+            var endpoint1 = new Uri("https://pokeapi.co/api/v2/ability/" + ability1);
+            var endpoint2 = new Uri("https://pokeapi.co/api/v2/ability/" + ability2);
+            var endpoint3 = new Uri("https://pokeapi.co/api/v2/ability/" + ability3);
+
+            var httpRequest1 = await client.GetAsync(endpoint1);
+            var httpRequest2 = await client.GetAsync(endpoint2);
+            var httpRequest3 = await client.GetAsync(endpoint3);
+
+            var result1 = await httpRequest1.Content.ReadAsStringAsync();
+            var result2 = await httpRequest2.Content.ReadAsStringAsync();
+            var result3 = await httpRequest3.Content.ReadAsStringAsync();
+
+            response1 = JsonConvert.DeserializeObject<PokemonData>(result1);
+            response2 = JsonConvert.DeserializeObject<PokemonData>(result2);
+            response3 = JsonConvert.DeserializeObject<PokemonData>(result3);
+
+            string abilityResponseDisplay1 = PokemonDataString(response1);
+            string abilityResponseDisplay2 = PokemonDataString(response2);
+            string abilityResponseDisplay3 = PokemonDataString(response3);
+        }
     }
 }

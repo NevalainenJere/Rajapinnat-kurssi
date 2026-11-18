@@ -43,6 +43,10 @@
             buttonCryLatest = new Button();
             labelCryLegacy = new Label();
             labelCryLatest = new Label();
+            label1 = new Label();
+            buttonAbility1 = new Button();
+            buttonAbility2 = new Button();
+            buttonAbility3 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureNormal).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureShiny).BeginInit();
             SuspendLayout();
@@ -51,7 +55,7 @@
             // 
             textBoxSearch.Location = new Point(430, 32);
             textBoxSearch.Name = "textBoxSearch";
-            textBoxSearch.Size = new Size(522, 31);
+            textBoxSearch.Size = new Size(522, 27);
             textBoxSearch.TabIndex = 0;
             textBoxSearch.KeyDown += textBoxSearch_KeyDown;
             // 
@@ -64,7 +68,7 @@
             labelSearch.Name = "labelSearch";
             labelSearch.Size = new Size(328, 24);
             labelSearch.TabIndex = 2;
-            labelSearch.Text = "Hae Pokémon nimellä tai ID:llä:";
+            labelSearch.Text = "Search Pokémon by name or ID:";
             // 
             // buttonSearch
             // 
@@ -74,7 +78,7 @@
             buttonSearch.Name = "buttonSearch";
             buttonSearch.Size = new Size(94, 29);
             buttonSearch.TabIndex = 3;
-            buttonSearch.Text = "Hae";
+            buttonSearch.Text = "Search";
             buttonSearch.UseVisualStyleBackColor = false;
             buttonSearch.Click += buttonSearch_Click;
             // 
@@ -111,7 +115,7 @@
             labelNormal.Location = new Point(50, 490);
             labelNormal.Margin = new Padding(2, 0, 2, 0);
             labelNormal.Name = "labelNormal";
-            labelNormal.Size = new Size(107, 32);
+            labelNormal.Size = new Size(88, 28);
             labelNormal.TabIndex = 5;
             labelNormal.Text = "Normal:";
             // 
@@ -124,7 +128,7 @@
             labelShiny.Location = new Point(297, 490);
             labelShiny.Margin = new Padding(2, 0, 2, 0);
             labelShiny.Name = "labelShiny";
-            labelShiny.Size = new Size(83, 32);
+            labelShiny.Size = new Size(69, 28);
             labelShiny.TabIndex = 5;
             labelShiny.Text = "Shiny:";
             // 
@@ -196,7 +200,7 @@
             labelCryLegacy.Location = new Point(598, 540);
             labelCryLegacy.Margin = new Padding(2, 0, 2, 0);
             labelCryLegacy.Name = "labelCryLegacy";
-            labelCryLegacy.Size = new Size(156, 32);
+            labelCryLegacy.Size = new Size(129, 28);
             labelCryLegacy.TabIndex = 9;
             labelCryLegacy.Text = "Cry (Legacy)";
             // 
@@ -208,9 +212,50 @@
             labelCryLatest.Location = new Point(774, 540);
             labelCryLatest.Margin = new Padding(2, 0, 2, 0);
             labelCryLatest.Name = "labelCryLatest";
-            labelCryLatest.Size = new Size(145, 32);
+            labelCryLatest.Size = new Size(121, 28);
             labelCryLatest.TabIndex = 9;
             labelCryLatest.Text = "Cry (Latest)";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label1.Location = new Point(32, 420);
+            label1.Name = "label1";
+            label1.Size = new Size(92, 20);
+            label1.TabIndex = 10;
+            label1.Text = "Ability Info:";
+            // 
+            // buttonAbility1
+            // 
+            buttonAbility1.Location = new Point(149, 416);
+            buttonAbility1.Name = "buttonAbility1";
+            buttonAbility1.Size = new Size(128, 29);
+            buttonAbility1.TabIndex = 11;
+            buttonAbility1.Text = "(ability1)";
+            buttonAbility1.UseVisualStyleBackColor = true;
+            buttonAbility1.Click += buttonAbility1_Click;
+            // 
+            // buttonAbility2
+            // 
+            buttonAbility2.Location = new Point(315, 416);
+            buttonAbility2.Name = "buttonAbility2";
+            buttonAbility2.Size = new Size(128, 29);
+            buttonAbility2.TabIndex = 11;
+            buttonAbility2.Text = "(ability2)";
+            buttonAbility2.UseVisualStyleBackColor = true;
+            buttonAbility2.Click += buttonAbility2_Click;
+            // 
+            // buttonAbility3
+            // 
+            buttonAbility3.Location = new Point(484, 416);
+            buttonAbility3.Name = "buttonAbility3";
+            buttonAbility3.Size = new Size(128, 29);
+            buttonAbility3.TabIndex = 11;
+            buttonAbility3.Text = "(ability3)";
+            buttonAbility3.UseVisualStyleBackColor = true;
+            buttonAbility3.Click += buttonAbility3_Click;
             // 
             // MainMenu
             // 
@@ -218,6 +263,10 @@
             BackColor = Color.Firebrick;
             BackgroundImage = Properties.Resources.form_background;
             ClientSize = new Size(1340, 768);
+            Controls.Add(buttonAbility3);
+            Controls.Add(buttonAbility2);
+            Controls.Add(buttonAbility1);
+            Controls.Add(label1);
             Controls.Add(labelCryLatest);
             Controls.Add(labelCryLegacy);
             Controls.Add(buttonCryLatest);
@@ -259,5 +308,9 @@
         private Button buttonCryLatest;
         private Label labelCryLegacy;
         private Label labelCryLatest;
+        private Label label1;
+        private Button buttonAbility1;
+        private Button buttonAbility2;
+        private Button buttonAbility3;
     }
 }
