@@ -11,12 +11,17 @@ namespace Pokedex
     public partial class MainMenu : Form
     {
         private static readonly HttpClient client = new();
-        PokemonData pokeData = new PokemonData();
-        Type1 pokeType1 = new Type1();
-        PokemonData? response;
-        string abilityResponseDisplay1;
-        string abilityResponseDisplay2;
-        string abilityResponseDisplay3;
+        //PokemonData pokeData = new PokemonData();
+        //Type1 pokeType1 = new Type1();
+
+        PokemonData? pokemonResponse;
+        AbilityData? abilityResponse1;
+        AbilityData? abilityResponse2;
+        AbilityData? abilityResponse3;
+
+        string abilityName1;
+        string abilityName2;
+        string abilityName3;
         int nextId;
         int previousId;
         string pokemonTypes;
@@ -49,15 +54,15 @@ namespace Pokedex
                 var endpoint = new Uri("https://pokeapi.co/api/v2/pokemon/" + search);
                 var httpRequest = await client.GetAsync(endpoint);
                 var result = await httpRequest.Content.ReadAsStringAsync();
-                response = JsonConvert.DeserializeObject<PokemonData>(result);
-                string responseDisplay = PokemonDataString(response);
+                pokemonResponse = JsonConvert.DeserializeObject<PokemonData>(result);
+                string responseDisplay = PokemonDataString(pokemonResponse);
 
-                PokemonSpriteFetch(response);
+                PokemonSpriteFetch(pokemonResponse);
 
-                if (response.name != null)
+                if (pokemonResponse.name != null)
                 {
                     ButtonRetrieve();
-                    ButtonTextSetter(response);
+                    ButtonTextSetter(pokemonResponse);
                 }
                 else
                 {
@@ -67,8 +72,8 @@ namespace Pokedex
                 richTextBoxInfo.Text = responseDisplay;
                 TypeColorSetter();
 
-                nextId = response.id + 1;
-                previousId = response.id - 1;
+                nextId = pokemonResponse.id + 1;
+                previousId = pokemonResponse.id - 1;
 
                 //if (richTextBoxInfo.Text == invalidInputError)
                 //{
@@ -355,12 +360,12 @@ namespace Pokedex
 
             var result = await httpRequest.Content.ReadAsStringAsync();
 
-            response = JsonConvert.DeserializeObject<PokemonData>(result);
+            pokemonResponse = JsonConvert.DeserializeObject<PokemonData>(result);
 
-            string responseDisplay = PokemonDataString(response);
-            PokemonSpriteFetch(response);
+            string responseDisplay = PokemonDataString(pokemonResponse);
+            PokemonSpriteFetch(pokemonResponse);
             ButtonRetrieve();
-            ButtonTextSetter(response);
+            ButtonTextSetter(pokemonResponse);
 
             previousId = nextId - 1;
             nextId += 1;
@@ -377,12 +382,12 @@ namespace Pokedex
 
             var result = await httpRequest.Content.ReadAsStringAsync();
 
-            response = JsonConvert.DeserializeObject<PokemonData>(result);
+            pokemonResponse = JsonConvert.DeserializeObject<PokemonData>(result);
 
-            string responseDisplay = PokemonDataString(response);
-            PokemonSpriteFetch(response);
+            string responseDisplay = PokemonDataString(pokemonResponse);
+            PokemonSpriteFetch(pokemonResponse);
             ButtonRetrieve();
-            ButtonTextSetter(response);
+            ButtonTextSetter(pokemonResponse);
 
             nextId = previousId + 1;
             previousId -= 1;
@@ -504,12 +509,12 @@ namespace Pokedex
 
         private void buttonCryLegacy_Click(object sender, EventArgs e)
         {
-            AudioPlayerLegacy(response);
+            AudioPlayerLegacy(pokemonResponse);
         }
 
         private void buttonCryLatest_Click(object sender, EventArgs e)
         {
-            AudioPlayerLatest(response);
+            AudioPlayerLatest(pokemonResponse);
         }
         private async void AudioPlayerLegacy(PokemonData? response)
         {
@@ -643,24 +648,23 @@ namespace Pokedex
 
         private void buttonAbility1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(abilityResponseDisplay1);
+            MessageBox.Show($"{abilityName1.ToUpper()} is the first ability of {pokemonResponse.name.ToUpper()}.\r\n" +
+                $"");
         }
 
         private void buttonAbility2_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(abilityResponseDisplay2);
+            MessageBox.Show(abilityName2);
         }
 
         private void buttonAbility3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(abilityResponseDisplay3);
+            MessageBox.Show($"{abilityName3.ToUpper()} is the third ability of {pokemonResponse.name.ToUpper()}.\r\n");
 
         }
         private async void AbilityRequest(string? ability1, string? ability2, string? ability3)
         {
-            PokemonData response1 = new();
-            PokemonData response2 = new();
-            PokemonData response3 = new();
+            List<string>? effectsToStringList = new();
 
             var endpoint1 = new Uri("https://pokeapi.co/api/v2/ability/" + ability1);
             var endpoint2 = new Uri("https://pokeapi.co/api/v2/ability/" + ability2);
@@ -674,13 +678,18 @@ namespace Pokedex
             var result2 = await httpRequest2.Content.ReadAsStringAsync();
             var result3 = await httpRequest3.Content.ReadAsStringAsync();
 
-            response1 = JsonConvert.DeserializeObject<PokemonData>(result1);
-            response2 = JsonConvert.DeserializeObject<PokemonData>(result2);
-            response3 = JsonConvert.DeserializeObject<PokemonData>(result3);
+            abilityResponse1 = JsonConvert.DeserializeObject<AbilityData>(result1);
+            abilityResponse2 = JsonConvert.DeserializeObject<AbilityData>(result2);
+            abilityResponse3 = JsonConvert.DeserializeObject<AbilityData>(result3);
 
-            string abilityResponseDisplay1 = PokemonDataString(response1);
-            string abilityResponseDisplay2 = PokemonDataString(response2);
-            string abilityResponseDisplay3 = PokemonDataString(response3);
+            abilityName1 = abilityResponse1.name;
+            abilityName2 = abilityResponse2.name;
+            abilityName3 = abilityResponse3.name;
+
+            foreach (var effect in abilityResponse1.effect_entries)
+            {
+                effectsToStringList.Add(effect.effect);
+            }
         }
     }
 }
