@@ -43,7 +43,7 @@
             buttonCryLatest = new Button();
             labelCryLegacy = new Label();
             labelCryLatest = new Label();
-            label1 = new Label();
+            labelAbilityInfo = new Label();
             buttonAbility1 = new Button();
             buttonAbility2 = new Button();
             buttonAbility3 = new Button();
@@ -216,16 +216,16 @@
             labelCryLatest.TabIndex = 9;
             labelCryLatest.Text = "Cry (Latest)";
             // 
-            // label1
+            // labelAbilityInfo
             // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label1.Location = new Point(32, 420);
-            label1.Name = "label1";
-            label1.Size = new Size(92, 20);
-            label1.TabIndex = 10;
-            label1.Text = "Ability Info:";
+            labelAbilityInfo.AutoSize = true;
+            labelAbilityInfo.BackColor = Color.Transparent;
+            labelAbilityInfo.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelAbilityInfo.Location = new Point(32, 420);
+            labelAbilityInfo.Name = "labelAbilityInfo";
+            labelAbilityInfo.Size = new Size(92, 20);
+            labelAbilityInfo.TabIndex = 10;
+            labelAbilityInfo.Text = "Ability Info:";
             // 
             // buttonAbility1
             // 
@@ -266,7 +266,7 @@
             Controls.Add(buttonAbility3);
             Controls.Add(buttonAbility2);
             Controls.Add(buttonAbility1);
-            Controls.Add(label1);
+            Controls.Add(labelAbilityInfo);
             Controls.Add(labelCryLatest);
             Controls.Add(labelCryLegacy);
             Controls.Add(buttonCryLatest);
@@ -308,7 +308,7 @@
         private Button buttonCryLatest;
         private Label labelCryLegacy;
         private Label labelCryLatest;
-        private Label label1;
+        private Label labelAbilityInfo;
         private Button buttonAbility1;
         private Button buttonAbility2;
         private Button buttonAbility3;

@@ -15,19 +15,11 @@ namespace Pokedex
         //Type1 pokeType1 = new Type1();
 
         PokemonData? pokemonResponse;
-        AbilityData? abilityResponse1;
-        AbilityData? abilityResponse2;
-        AbilityData? abilityResponse3;
+        AbilityData? abilityResponse;
 
-        string abilityName1;
-        string abilityName2;
-        string abilityName3;
-        string abilityDesc1;
-        string abilityDesc2;
-        string abilityDesc3;
-        string abilityPokemon1;
-        string abilityPokemon2;
-        string abilityPokemon3;
+        string abilityName;
+        string abilityDesc;
+        string abilityPokemon;
 
         int nextId;
         int previousId;
@@ -420,6 +412,7 @@ namespace Pokedex
             buttonAbility2.Visible = false;
             buttonAbility3.Enabled = false;
             buttonAbility3.Visible = false;
+            labelAbilityInfo.Visible = false;
 
             //else if (richTextBoxInfo.Text == invalidInputError)
             //{
@@ -447,6 +440,7 @@ namespace Pokedex
             buttonCryLatest.Visible = true;
             labelCryLegacy.Visible = true;
             labelCryLatest.Visible = true;
+            labelAbilityInfo.Visible = true;
         }
         private async void ButtonTextSetter(PokemonData? response)
         {
@@ -610,8 +604,6 @@ namespace Pokedex
             {
                 if (abilitiesList.Count == 1)
                 {
-                    AbilityRequest(abilitiesList[0], null, null);
-
                     buttonAbility1.Text = abilitiesList[0].ToUpper();
                     buttonAbility1.Enabled = true;
                     buttonAbility1.Visible = true;
@@ -620,8 +612,6 @@ namespace Pokedex
                 }
                 else if (abilitiesList.Count == 2)
                 {
-                    AbilityRequest(abilitiesList[0], abilitiesList[1], null);
-
                     buttonAbility1.Text = abilitiesList[0].ToUpper();
                     buttonAbility2.Text = abilitiesList[1].ToUpper();
                     buttonAbility1.Enabled = true;
@@ -633,8 +623,6 @@ namespace Pokedex
                 }
                 else
                 {
-                    AbilityRequest(abilitiesList[0], abilitiesList[1], abilitiesList[2]);
-
                     buttonAbility1.Text = abilitiesList[0].ToUpper();
                     buttonAbility2.Text = abilitiesList[1].ToUpper();
                     buttonAbility3.Text = abilitiesList[2].ToUpper();
@@ -653,120 +641,82 @@ namespace Pokedex
 
         }
 
-        private void buttonAbility1_Click(object sender, EventArgs e)
+        private async void buttonAbility1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"{abilityName1.ToUpper()} is the first ability of {pokemonResponse.name.ToUpper()}.\r\n" +
-                $"{abilityDesc1}\r\n\r\n" +
-                $"The following Pokémon have this ability: {abilityPokemon1}");
+            await AbilityRequest(buttonAbility1.Text.ToLower());
+
+            MessageBox.Show($"{abilityName.ToUpper()} is the first ability of {pokemonResponse.name.ToUpper()}.\r\n\r\n" +
+                $"{abilityDesc}\r\n\r\n" +
+                $"The following Pokémon have this ability: {abilityPokemon}");
         }
 
-        private void buttonAbility2_Click(object sender, EventArgs e)
+        private async void buttonAbility2_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"{abilityName2.ToUpper()} is the first ability of {pokemonResponse.name.ToUpper()}.\r\n" +
-                $"{abilityDesc2}\r\n\r\n" +
-                $"The following Pokémon have this ability: {abilityPokemon2}");
+            await AbilityRequest(buttonAbility2.Text.ToLower());
+
+            MessageBox.Show($"{abilityName.ToUpper()} is the second ability of {pokemonResponse.name.ToUpper()}.\r\n\r\n" +
+                $"{abilityDesc}\r\n\r\n" +
+                $"The following Pokémon have this ability: {abilityPokemon}");
         }
 
-        private void buttonAbility3_Click(object sender, EventArgs e)
+        private async void buttonAbility3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"{abilityName3.ToUpper()} is the first ability of {pokemonResponse.name.ToUpper()}.\r\n" +
-                 $"{abilityDesc3}\r\n\r\n" +
-                 $"The following Pokémon have this ability: {abilityPokemon3}");
+            await AbilityRequest(buttonAbility3.Text.ToLower());
+
+            MessageBox.Show($"{abilityName.ToUpper()} is the third ability of {pokemonResponse.name.ToUpper()}.\r\n\r\n" +
+                 $"{abilityDesc}\r\n\r\n" +
+                 $"The following Pokémon have this ability: {abilityPokemon}");
 
         }
-        private async void AbilityRequest(string? ability1, string? ability2, string? ability3)
+        private async Task AbilityRequest(string? ability)
         {
             List<string>? effectsToStringList = new();
             List<string>? abilityPokemonToStringList1 = new();
-            List<string>? abilityPokemonToStringList2 = new();
-            List<string>? abilityPokemonToStringList3 = new();
 
             string abilityPokemonListToString1;
-            string abilityPokemonListToString2;
-            string abilityPokemonListToString3;
 
-            var endpoint1 = new Uri("https://pokeapi.co/api/v2/ability/" + ability1);
-            var endpoint2 = new Uri("https://pokeapi.co/api/v2/ability/" + ability2);
-            var endpoint3 = new Uri("https://pokeapi.co/api/v2/ability/" + ability3);
+            var endpoint1 = new Uri("https://pokeapi.co/api/v2/ability/" + ability);
 
             var httpRequest1 = await client.GetAsync(endpoint1);
-            var httpRequest2 = await client.GetAsync(endpoint2);
-            var httpRequest3 = await client.GetAsync(endpoint3);
 
             var result1 = await httpRequest1.Content.ReadAsStringAsync();
-            var result2 = await httpRequest2.Content.ReadAsStringAsync();
-            var result3 = await httpRequest3.Content.ReadAsStringAsync();
 
-            abilityResponse1 = JsonConvert.DeserializeObject<AbilityData>(result1);
-            abilityResponse2 = JsonConvert.DeserializeObject<AbilityData>(result2);
-            abilityResponse3 = JsonConvert.DeserializeObject<AbilityData>(result3);
+            abilityResponse = JsonConvert.DeserializeObject<AbilityData>(result1);
 
-            abilityName1 = abilityResponse1.name;
-            abilityName2 = abilityResponse2.name;
-            abilityName3 = abilityResponse3.name;
+            abilityName = abilityResponse.name;
 
-            if (abilityResponse1.effect_entries != null)
+            if (abilityResponse.effect_entries != null)
             {
-                foreach (var effect in abilityResponse1.effect_entries)
+                foreach (var effect in abilityResponse.effect_entries)
                 {
                     if (effect.language.name == "en")
                     {
                         effectsToStringList.Add(effect.effect);
                     }
                 }
-                foreach (var pokemon in abilityResponse1.pokemon)
+                foreach (var pokemon in abilityResponse.pokemon)
                 {
-                    abilityPokemonToStringList1.Add(pokemon.ToString());
-                }
-            }
-            if (abilityResponse2.effect_entries != null)
-            {
-                foreach (var effect in abilityResponse2.effect_entries)
-                {
-                    if (effect.language.name == "en")
-                    {
-                        effectsToStringList.Add(effect.effect);
-                    }
-                }
-                foreach (var pokemon in abilityResponse2.pokemon)
-                {
-                    abilityPokemonToStringList2.Add(pokemon.ToString());
-                }
-            }
-            if (abilityResponse3.effect_entries != null)
-            {
-                foreach (var effect in abilityResponse3.effect_entries)
-                {
-                    if (effect.language.name == "en")
-                    {
-                        effectsToStringList.Add(effect.effect);
-                    }
-                }
-                foreach (var pokemon in abilityResponse3.pokemon)
-                {
-                    abilityPokemonToStringList3.Add(pokemon.ToString());
+                    abilityPokemonToStringList1.Add(pokemon.pokemon.name.ToString());
                 }
             }
 
-            if (effectsToStringList.Count == 1)
-            {
-                abilityDesc1 = effectsToStringList[0];
-            }
-            else if (effectsToStringList.Count == 2)
-            {
-                abilityDesc1 = effectsToStringList[0];
-                abilityDesc2 = effectsToStringList[1];
-            }
-            else
-            {
-                abilityDesc1 = effectsToStringList[0];
-                abilityDesc2 = effectsToStringList[1];
-                abilityDesc3 = effectsToStringList[2];
-            }
+            abilityDesc = effectsToStringList[0];
 
-            abilityPokemonListToString1 = abilityPokemonToStringList1.ToString();
-            abilityPokemonListToString2 = abilityPokemonToStringList2.ToString();
-            abilityPokemonListToString3 = abilityPokemonToStringList3.ToString();
+            for (int i = 0; i < abilityPokemonToStringList1.Count; i++)
+            {
+                if (i == abilityPokemonToStringList1.Count - 1)
+                {
+                    abilityPokemon += " " + abilityPokemonToStringList1[i].ToUpper();
+                }
+                else if (i == 0)
+                {
+                    abilityPokemon += abilityPokemonToStringList1[i].ToUpper() + ",";
+                }
+                else
+                {
+                    abilityPokemon += " " + abilityPokemonToStringList1[i].ToUpper() + ",";
+                }
+            }
         }
     }
 }
