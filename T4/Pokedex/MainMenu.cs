@@ -22,6 +22,13 @@ namespace Pokedex
         string abilityName1;
         string abilityName2;
         string abilityName3;
+        string abilityDesc1;
+        string abilityDesc2;
+        string abilityDesc3;
+        string abilityPokemon1;
+        string abilityPokemon2;
+        string abilityPokemon3;
+
         int nextId;
         int previousId;
         string pokemonTypes;
@@ -649,22 +656,34 @@ namespace Pokedex
         private void buttonAbility1_Click(object sender, EventArgs e)
         {
             MessageBox.Show($"{abilityName1.ToUpper()} is the first ability of {pokemonResponse.name.ToUpper()}.\r\n" +
-                $"");
+                $"{abilityDesc1}\r\n\r\n" +
+                $"The following Pokémon have this ability: {abilityPokemon1}");
         }
 
         private void buttonAbility2_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(abilityName2);
+            MessageBox.Show($"{abilityName2.ToUpper()} is the first ability of {pokemonResponse.name.ToUpper()}.\r\n" +
+                $"{abilityDesc2}\r\n\r\n" +
+                $"The following Pokémon have this ability: {abilityPokemon2}");
         }
 
         private void buttonAbility3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"{abilityName3.ToUpper()} is the third ability of {pokemonResponse.name.ToUpper()}.\r\n");
+            MessageBox.Show($"{abilityName3.ToUpper()} is the first ability of {pokemonResponse.name.ToUpper()}.\r\n" +
+                 $"{abilityDesc3}\r\n\r\n" +
+                 $"The following Pokémon have this ability: {abilityPokemon3}");
 
         }
         private async void AbilityRequest(string? ability1, string? ability2, string? ability3)
         {
             List<string>? effectsToStringList = new();
+            List<string>? abilityPokemonToStringList1 = new();
+            List<string>? abilityPokemonToStringList2 = new();
+            List<string>? abilityPokemonToStringList3 = new();
+
+            string abilityPokemonListToString1;
+            string abilityPokemonListToString2;
+            string abilityPokemonListToString3;
 
             var endpoint1 = new Uri("https://pokeapi.co/api/v2/ability/" + ability1);
             var endpoint2 = new Uri("https://pokeapi.co/api/v2/ability/" + ability2);
@@ -686,10 +705,68 @@ namespace Pokedex
             abilityName2 = abilityResponse2.name;
             abilityName3 = abilityResponse3.name;
 
-            foreach (var effect in abilityResponse1.effect_entries)
+            if (abilityResponse1.effect_entries != null)
             {
-                effectsToStringList.Add(effect.effect);
+                foreach (var effect in abilityResponse1.effect_entries)
+                {
+                    if (effect.language.name == "en")
+                    {
+                        effectsToStringList.Add(effect.effect);
+                    }
+                }
+                foreach (var pokemon in abilityResponse1.pokemon)
+                {
+                    abilityPokemonToStringList1.Add(pokemon.ToString());
+                }
             }
+            if (abilityResponse2.effect_entries != null)
+            {
+                foreach (var effect in abilityResponse2.effect_entries)
+                {
+                    if (effect.language.name == "en")
+                    {
+                        effectsToStringList.Add(effect.effect);
+                    }
+                }
+                foreach (var pokemon in abilityResponse2.pokemon)
+                {
+                    abilityPokemonToStringList2.Add(pokemon.ToString());
+                }
+            }
+            if (abilityResponse3.effect_entries != null)
+            {
+                foreach (var effect in abilityResponse3.effect_entries)
+                {
+                    if (effect.language.name == "en")
+                    {
+                        effectsToStringList.Add(effect.effect);
+                    }
+                }
+                foreach (var pokemon in abilityResponse3.pokemon)
+                {
+                    abilityPokemonToStringList3.Add(pokemon.ToString());
+                }
+            }
+
+            if (effectsToStringList.Count == 1)
+            {
+                abilityDesc1 = effectsToStringList[0];
+            }
+            else if (effectsToStringList.Count == 2)
+            {
+                abilityDesc1 = effectsToStringList[0];
+                abilityDesc2 = effectsToStringList[1];
+            }
+            else
+            {
+                abilityDesc1 = effectsToStringList[0];
+                abilityDesc2 = effectsToStringList[1];
+                abilityDesc3 = effectsToStringList[2];
+            }
+
+            abilityPokemonListToString1 = abilityPokemonToStringList1.ToString();
+            abilityPokemonListToString2 = abilityPokemonToStringList2.ToString();
+            abilityPokemonListToString3 = abilityPokemonToStringList3.ToString();
         }
     }
 }
