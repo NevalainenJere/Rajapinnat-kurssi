@@ -28,15 +28,18 @@ namespace Tietovisa
             }
         }
 
-        public async Task QuizInfoRequest()
+        public async void QuizInfoRequest()
         {
             try
             {
-                numberOfQuestions = comboBoxNumberOfQuestions.SelectedItem.ToString();
+                numberOfQuestions = comboBoxNumberOfQuestions.SelectedItem.ToString()
+                    ?? throw new InvalidOperationException("Please select the amount of questions");
                 category = comboBoxCategory.SelectedValue?.ToString()
                     ?? throw new InvalidOperationException("Please select a category.");
-                difficulty = comboBoxDifficulty.SelectedItem.ToString();
-                questionType = comboBoxQuestionType.SelectedItem.ToString();
+                difficulty = comboBoxDifficulty.SelectedItem.ToString()
+                    ?? throw new InvalidOperationException("Please select the difficulty.");
+                questionType = comboBoxQuestionType.SelectedItem.ToString()
+                    ?? throw new InvalidOperationException("Please select the question type.");
 
                 var endpoint = $"{urlBase}amount={numberOfQuestions}&category={category}&difficulty={difficulty}&type={questionType}";
                 var client = new HttpClient();
