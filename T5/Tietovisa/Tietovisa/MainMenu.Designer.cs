@@ -43,15 +43,15 @@
             // comboBoxNumberOfQuestions
             // 
             comboBoxNumberOfQuestions.FormattingEnabled = true;
-            comboBoxNumberOfQuestions.Location = new Point(470, 242);
+            comboBoxNumberOfQuestions.Location = new Point(453, 240);
             comboBoxNumberOfQuestions.Name = "comboBoxNumberOfQuestions";
-            comboBoxNumberOfQuestions.Size = new Size(151, 28);
+            comboBoxNumberOfQuestions.Size = new Size(240, 28);
             comboBoxNumberOfQuestions.TabIndex = 0;
             // 
             // labelNumberOfQuestions
             // 
             labelNumberOfQuestions.AutoSize = true;
-            labelNumberOfQuestions.Location = new Point(313, 245);
+            labelNumberOfQuestions.Location = new Point(296, 243);
             labelNumberOfQuestions.Name = "labelNumberOfQuestions";
             labelNumberOfQuestions.Size = new Size(151, 20);
             labelNumberOfQuestions.TabIndex = 1;
@@ -60,7 +60,7 @@
             // labelCategory
             // 
             labelCategory.AutoSize = true;
-            labelCategory.Location = new Point(313, 295);
+            labelCategory.Location = new Point(296, 293);
             labelCategory.Name = "labelCategory";
             labelCategory.Size = new Size(72, 20);
             labelCategory.TabIndex = 1;
@@ -69,7 +69,7 @@
             // labelQuestionType
             // 
             labelQuestionType.AutoSize = true;
-            labelQuestionType.Location = new Point(313, 350);
+            labelQuestionType.Location = new Point(296, 348);
             labelQuestionType.Name = "labelQuestionType";
             labelQuestionType.Size = new Size(104, 20);
             labelQuestionType.TabIndex = 1;
@@ -78,7 +78,7 @@
             // labelDifficulty
             // 
             labelDifficulty.AutoSize = true;
-            labelDifficulty.Location = new Point(313, 400);
+            labelDifficulty.Location = new Point(296, 398);
             labelDifficulty.Name = "labelDifficulty";
             labelDifficulty.Size = new Size(72, 20);
             labelDifficulty.TabIndex = 1;
@@ -87,27 +87,27 @@
             // comboBoxCategory
             // 
             comboBoxCategory.FormattingEnabled = true;
-            comboBoxCategory.Location = new Point(470, 292);
+            comboBoxCategory.Location = new Point(453, 290);
             comboBoxCategory.Name = "comboBoxCategory";
-            comboBoxCategory.Size = new Size(151, 28);
+            comboBoxCategory.Size = new Size(240, 28);
             comboBoxCategory.TabIndex = 0;
             // 
             // comboBoxQuestionType
             // 
             comboBoxQuestionType.FormattingEnabled = true;
             comboBoxQuestionType.Items.AddRange(new object[] { "Multiple choice", "True / False" });
-            comboBoxQuestionType.Location = new Point(470, 347);
+            comboBoxQuestionType.Location = new Point(453, 345);
             comboBoxQuestionType.Name = "comboBoxQuestionType";
-            comboBoxQuestionType.Size = new Size(151, 28);
+            comboBoxQuestionType.Size = new Size(240, 28);
             comboBoxQuestionType.TabIndex = 0;
             // 
             // comboBoxDifficulty
             // 
             comboBoxDifficulty.FormattingEnabled = true;
             comboBoxDifficulty.Items.AddRange(new object[] { "Easy", "Medium", "Hard" });
-            comboBoxDifficulty.Location = new Point(470, 397);
+            comboBoxDifficulty.Location = new Point(453, 395);
             comboBoxDifficulty.Name = "comboBoxDifficulty";
-            comboBoxDifficulty.Size = new Size(151, 28);
+            comboBoxDifficulty.Size = new Size(240, 28);
             comboBoxDifficulty.TabIndex = 0;
             // 
             // labelQuizOptions
