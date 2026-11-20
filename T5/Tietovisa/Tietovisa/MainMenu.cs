@@ -76,7 +76,7 @@ namespace Tietovisa
             var jsonCategory = await responseCategory.Content.ReadAsStringAsync();
             var categoryInfo = JsonSerializer.Deserialize<CategoryInfo>(jsonCategory);
             var categories = categoryInfo?.TriviaCategories
-                ?? throw new JsonException("The category response did not contain a trivia_categories list.");
+                ?? throw new JsonException("The category response did not contain a 'categories' list.");
 
             comboBoxCategory.DisplayMember = nameof(TriviaCategory.Name);
             comboBoxCategory.ValueMember = nameof(TriviaCategory.Id);
