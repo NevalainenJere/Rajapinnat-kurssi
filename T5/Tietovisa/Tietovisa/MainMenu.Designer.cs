@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            comboBox1 = new ComboBox();
+            comboBoxNumberOfQuestions = new ComboBox();
             labelNumberOfQuestions = new Label();
             labelCategory = new Label();
             labelQuestionType = new Label();
@@ -37,15 +37,16 @@
             comboBoxQuestionType = new ComboBox();
             comboBoxDifficulty = new ComboBox();
             labelQuizOptions = new Label();
+            buttonStartQuiz = new Button();
             SuspendLayout();
             // 
-            // comboBox1
+            // comboBoxNumberOfQuestions
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(470, 242);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(151, 28);
-            comboBox1.TabIndex = 0;
+            comboBoxNumberOfQuestions.FormattingEnabled = true;
+            comboBoxNumberOfQuestions.Location = new Point(470, 242);
+            comboBoxNumberOfQuestions.Name = "comboBoxNumberOfQuestions";
+            comboBoxNumberOfQuestions.Size = new Size(151, 28);
+            comboBoxNumberOfQuestions.TabIndex = 0;
             // 
             // labelNumberOfQuestions
             // 
@@ -94,6 +95,7 @@
             // comboBoxQuestionType
             // 
             comboBoxQuestionType.FormattingEnabled = true;
+            comboBoxQuestionType.Items.AddRange(new object[] { "Multiple choice", "True / False" });
             comboBoxQuestionType.Location = new Point(470, 347);
             comboBoxQuestionType.Name = "comboBoxQuestionType";
             comboBoxQuestionType.Size = new Size(151, 28);
@@ -102,6 +104,7 @@
             // comboBoxDifficulty
             // 
             comboBoxDifficulty.FormattingEnabled = true;
+            comboBoxDifficulty.Items.AddRange(new object[] { "Easy", "Medium", "Hard" });
             comboBoxDifficulty.Location = new Point(470, 397);
             comboBoxDifficulty.Name = "comboBoxDifficulty";
             comboBoxDifficulty.Size = new Size(151, 28);
@@ -117,11 +120,22 @@
             labelQuizOptions.TabIndex = 2;
             labelQuizOptions.Text = "SELECT QUIZ OPTIONS";
             // 
+            // buttonStartQuiz
+            // 
+            buttonStartQuiz.Location = new Point(431, 459);
+            buttonStartQuiz.Name = "buttonStartQuiz";
+            buttonStartQuiz.Size = new Size(94, 29);
+            buttonStartQuiz.TabIndex = 3;
+            buttonStartQuiz.Text = "Start Quiz!";
+            buttonStartQuiz.UseVisualStyleBackColor = true;
+            buttonStartQuiz.Click += buttonStartQuiz_Click;
+            // 
             // MainMenu
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(974, 514);
+            Controls.Add(buttonStartQuiz);
             Controls.Add(labelQuizOptions);
             Controls.Add(labelDifficulty);
             Controls.Add(labelQuestionType);
@@ -130,18 +144,18 @@
             Controls.Add(comboBoxDifficulty);
             Controls.Add(comboBoxQuestionType);
             Controls.Add(comboBoxCategory);
-            Controls.Add(comboBox1);
+            Controls.Add(comboBoxNumberOfQuestions);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "MainMenu";
-            Text = "Quiz (";
+            Text = "Quiz Menu";
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private ComboBox comboBox1;
+        private ComboBox comboBoxNumberOfQuestions;
         private Label labelNumberOfQuestions;
         private Label labelCategory;
         private Label labelQuestionType;
@@ -150,5 +164,6 @@
         private ComboBox comboBoxQuestionType;
         private ComboBox comboBoxDifficulty;
         private Label labelQuizOptions;
+        private Button buttonStartQuiz;
     }
 }
