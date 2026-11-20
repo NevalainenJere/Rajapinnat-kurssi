@@ -36,6 +36,7 @@
             comboBoxCategory = new ComboBox();
             comboBoxQuestionType = new ComboBox();
             comboBoxDifficulty = new ComboBox();
+            labelQuizOptions = new Label();
             SuspendLayout();
             // 
             // comboBox1
@@ -106,11 +107,22 @@
             comboBoxDifficulty.Size = new Size(151, 28);
             comboBoxDifficulty.TabIndex = 0;
             // 
+            // labelQuizOptions
+            // 
+            labelQuizOptions.AutoSize = true;
+            labelQuizOptions.Font = new Font("Segoe UI", 48F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelQuizOptions.Location = new Point(57, 39);
+            labelQuizOptions.Name = "labelQuizOptions";
+            labelQuizOptions.Size = new Size(855, 106);
+            labelQuizOptions.TabIndex = 2;
+            labelQuizOptions.Text = "SELECT QUIZ OPTIONS";
+            // 
             // MainMenu
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(974, 514);
+            Controls.Add(labelQuizOptions);
             Controls.Add(labelDifficulty);
             Controls.Add(labelQuestionType);
             Controls.Add(labelCategory);
@@ -122,7 +134,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "MainMenu";
-            Text = "Form1";
+            Text = "Quiz (";
             ResumeLayout(false);
             PerformLayout();
         }
@@ -137,5 +149,6 @@
         private ComboBox comboBoxCategory;
         private ComboBox comboBoxQuestionType;
         private ComboBox comboBoxDifficulty;
+        private Label labelQuizOptions;
     }
 }
