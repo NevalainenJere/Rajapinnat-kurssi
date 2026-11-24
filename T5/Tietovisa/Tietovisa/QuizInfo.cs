@@ -17,19 +17,4 @@ namespace Tietovisa
         public string correct_answer { get; set; }
         public string[] incorrect_answers { get; set; }
     }
-
-    public class CategoryInfo
-    {
-        [JsonPropertyName("trivia_categories")]
-        public TriviaCategory[]? TriviaCategories { get; set; }
-    }
-
-    public class TriviaCategory
-    {
-        [JsonPropertyName("id")]
-        public int Id { get; set; }
-
-        [JsonPropertyName("name")]
-        public string Name { get; set; } = string.Empty;
-    }
 }
