@@ -109,6 +109,7 @@
             comboBoxDifficulty.Name = "comboBoxDifficulty";
             comboBoxDifficulty.Size = new Size(240, 28);
             comboBoxDifficulty.TabIndex = 0;
+            comboBoxDifficulty.SelectedIndexChanged += comboBoxDifficulty_SelectedIndexChanged;
             // 
             // labelQuizOptions
             // 

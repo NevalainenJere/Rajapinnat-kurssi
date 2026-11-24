@@ -11,7 +11,6 @@ namespace Tietovisa
         string category;
         string difficulty;
         string questionType;
-        int categoryId;
 
         List<int> questionCountListEasy = new();
         List<int> questionCountListMedium = new();
@@ -75,51 +74,56 @@ namespace Tietovisa
         }
         private async Task ComboBoxItemFetch()
         {
-            await CategoryFetch();
-            (HttpClient clientNumberOfQuestions, HttpResponseMessage responseNumberOfQuestions) = await QuestionCountFetch();
-            comboBoxNumberOfQuestions.DataSource = questionCountListEasy;
-        }
-
-        private async Task<(HttpClient clientNumberOfQuestions, HttpResponseMessage responseNumberOfQuestions)> QuestionCountFetch()
-        {
-            string endpointNumberOfQuestions = "https://opentdb.com/api_count.php?category=" + comboBoxCategory.ValueMember;
-            using var clientNumberOfQuestions = new HttpClient();
-            using var responseNumberOfQuestions = await clientNumberOfQuestions.GetAsync(endpointNumberOfQuestions);
-            responseNumberOfQuestions.EnsureSuccessStatusCode();
-
-            var jsonNumberOfQuestions = await responseNumberOfQuestions.Content.ReadAsStringAsync();
-            var numberOfQuestionsInfo = JsonSerializer.Deserialize<QuestionCountInfo>(jsonNumberOfQuestions);
-
-            var questionCountEasy = numberOfQuestionsInfo?.category_question_count.total_easy_question_count
-                ?? throw new JsonException("The response did not contain a question count.");
-            var questionCountMedium = numberOfQuestionsInfo?.category_question_count.total_medium_question_count
-                ?? throw new JsonException("The response did not contain a question count.");
-            var questionCountHard = numberOfQuestionsInfo?.category_question_count.total_hard_question_count
-                ?? throw new JsonException("The response did not contain a question count.");
-
-            if (difficulty == "easy")
+            if (comboBoxCategory.Items.Count == 0)
             {
-                for (int i = 0; i < questionCountEasy; i++)
+                await CategoryFetch();
+            }
+            if (comboBoxCategory.DisplayMember != "" & comboBoxDifficulty.SelectedItem != null)
+            {
+                string endpointNumberOfQuestions = "https://opentdb.com/api_count.php?category=" + "";
+                using var clientNumberOfQuestions = new HttpClient();
+                using var responseNumberOfQuestions = await clientNumberOfQuestions.GetAsync(endpointNumberOfQuestions);
+                responseNumberOfQuestions.EnsureSuccessStatusCode();
+
+                var jsonNumberOfQuestions = await responseNumberOfQuestions.Content.ReadAsStringAsync();
+                var numberOfQuestionsInfo = JsonSerializer.Deserialize<QuestionCountInfo>(jsonNumberOfQuestions);
+
+                var questionCountEasy = numberOfQuestionsInfo?.category_question_count.total_easy_question_count
+                    ?? throw new JsonException("The response did not contain a question count.");
+                var questionCountMedium = numberOfQuestionsInfo?.category_question_count.total_medium_question_count
+                    ?? throw new JsonException("The response did not contain a question count.");
+                var questionCountHard = numberOfQuestionsInfo?.category_question_count.total_hard_question_count
+                    ?? throw new JsonException("The response did not contain a question count.");
+
+                if (difficulty == "Easy")
                 {
-                    questionCountListEasy.Add(i);
+                    for (int i = 0; i < questionCountEasy; i++)
+                    {
+                        questionCountListEasy.Add(i);
+                        comboBoxNumberOfQuestions.Items.Add(i);
+                    }
+                }
+                else if (difficulty == "Medium")
+                {
+                    for (int i = 0; i < questionCountMedium; i++)
+                    {
+                        questionCountListMedium.Add(i);
+                        comboBoxNumberOfQuestions.Items.Add(i);
+                    }
+                }
+                else if (difficulty == "Hard")
+                {
+                    for (int i = 0; i < questionCountHard; i++)
+                    {
+                        questionCountListHard.Add(i);
+                        comboBoxNumberOfQuestions.Items.Add(i);
+                    }
+                }
+                else
+                {
+
                 }
             }
-            if (difficulty == "medium")
-            {
-                for (int i = 0; i < questionCountMedium; i++)
-                {
-                    questionCountListMedium.Add(i);
-                }
-            }
-            if (difficulty == "hard")
-            {
-                for (int i = 0; i < questionCountHard; i++)
-                {
-                    questionCountListHard.Add(i);
-                }
-            }
-
-            return (clientNumberOfQuestions, responseNumberOfQuestions);
         }
 
         private async Task CategoryFetch()
@@ -137,6 +141,14 @@ namespace Tietovisa
             comboBoxCategory.DisplayMember = nameof(TriviaCategory.Name);
             comboBoxCategory.ValueMember = nameof(TriviaCategory.Id);
             comboBoxCategory.DataSource = categories;
+
+            
+        }
+
+        private async void comboBoxDifficulty_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            difficulty = comboBoxDifficulty.SelectedItem.ToString();
+            await ComboBoxItemFetch();
         }
     }
 }
