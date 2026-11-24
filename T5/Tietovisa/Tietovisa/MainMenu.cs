@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Text.Json;
 
@@ -10,6 +11,7 @@ namespace Tietovisa
         string category;
         string difficulty;
         string questionType;
+        int categoryId;
         public MainMenu()
         {
             InitializeComponent();
@@ -32,18 +34,18 @@ namespace Tietovisa
         {
             try
             {
-                numberOfQuestions = comboBoxNumberOfQuestions.SelectedItem.ToString()
+                numberOfQuestions = comboBoxNumberOfQuestions.SelectedItem?.ToString()
                     ?? throw new InvalidOperationException("Please select the amount of questions");
                 category = comboBoxCategory.SelectedValue?.ToString()
                     ?? throw new InvalidOperationException("Please select a category.");
-                difficulty = comboBoxDifficulty.SelectedItem.ToString()
+                difficulty = comboBoxDifficulty.SelectedItem?.ToString()
                     ?? throw new InvalidOperationException("Please select the difficulty.");
-                questionType = comboBoxQuestionType.SelectedItem.ToString()
+                questionType = comboBoxQuestionType.SelectedItem?.ToString()
                     ?? throw new InvalidOperationException("Please select the question type.");
 
                 var endpoint = $"{urlBase}amount={numberOfQuestions}&category={category}&difficulty={difficulty}&type={questionType}";
-                var client = new HttpClient();
-                var response = await client.GetAsync(endpoint);
+                using var client = new HttpClient();
+                using var response = await client.GetAsync(endpoint);
                 if (response.IsSuccessStatusCode)
                 {
                     var json = await response.Content.ReadAsStringAsync();
@@ -67,6 +69,19 @@ namespace Tietovisa
             QuizInfoRequest();
         }
         private async Task ComboBoxItemFetch()
+        {
+            await CategoryFetch();
+
+            string endpointNumberOfQuestions = "https://opentdb.com/api_count.php?category=" + comboBoxCategory.ValueMember;
+            using var clientNumberOfQuestions = new HttpClient();
+            using var responseNumberOfQuestions = await clientNumberOfQuestions.GetAsync(endpointNumberOfQuestions);
+            responseNumberOfQuestions.EnsureSuccessStatusCode();
+
+            var jsonNumberOfQuestions = await responseNumberOfQuestions.Content.ReadAsStringAsync();
+            //var numberOfQuestionsInfo = JsonSerializer.Deserialize<>
+        }
+
+        private async Task CategoryFetch()
         {
             const string endpointCategory = "https://opentdb.com/api_category.php";
             using var clientCategory = new HttpClient();
