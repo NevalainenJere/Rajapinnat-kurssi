@@ -40,12 +40,21 @@ namespace Tietovisa
             {
                 numberOfQuestions = comboBoxNumberOfQuestions.SelectedItem?.ToString()
                     ?? throw new InvalidOperationException("Please select the amount of questions");
-                category = comboBoxCategory.SelectedValue?.ToString()
+                category = comboBoxCategory.SelectedValue?.ToString()?.ToLower()
                     ?? throw new InvalidOperationException("Please select a category.");
-                difficulty = comboBoxDifficulty.SelectedItem?.ToString()
+                difficulty = comboBoxDifficulty.SelectedItem?.ToString()?.ToLower()
                     ?? throw new InvalidOperationException("Please select the difficulty.");
-                questionType = comboBoxQuestionType.SelectedItem?.ToString()
+                questionType = comboBoxQuestionType.SelectedItem?.ToString()?.ToLower()
                     ?? throw new InvalidOperationException("Please select the question type.");
+
+                if (questionType == "multiple choice")
+                {
+                    questionType = "multiple";
+                }
+                else
+                {
+                    questionType = "boolean";
+                }
 
                 var endpoint = $"{urlBase}amount={numberOfQuestions}&category={category}&difficulty={difficulty}&type={questionType}";
                 using var client = new HttpClient();
@@ -97,6 +106,19 @@ namespace Tietovisa
                 var questionCountHard = numberOfQuestionsInfo?.category_question_count.total_hard_question_count
                     ?? throw new JsonException("The response did not contain a question count.");
 
+                if (questionCountEasy > 50)
+                {
+                    questionCountEasy = 50;
+                }
+                if (questionCountMedium > 50)
+                {
+                    questionCountMedium = 50;
+                }
+                if (questionCountHard > 50)
+                {
+                    questionCountHard = 50;
+                }
+
                 if (difficulty == "Easy")
                 {
                     for (int i = 0; i < questionCountEasy; i++)
@@ -144,20 +166,6 @@ namespace Tietovisa
             comboBoxCategory.ValueMember = nameof(TriviaCategory.Id);
             comboBoxCategory.DataSource = categories;
 
-        }
-        private async void CategorySelect()
-        {
-            var categoryId = comboBoxCategory.SelectedValue;
-
-            string endpointCategorySelect = "https://opentdb.com/api_count.php?category=" + categoryId;
-            using var clientCategorySelect = new HttpClient();
-            using var responseCategorySelect = await clientCategorySelect.GetAsync(endpointCategorySelect);
-            responseCategorySelect.EnsureSuccessStatusCode();
-
-            var jsonCategorySelect = await responseCategorySelect.Content.ReadAsStringAsync();
-            var categorySelectInfo = JsonSerializer.Deserialize<CategoryInfo>(jsonCategorySelect);
-            var categorySelected = categorySelectInfo?.TriviaCategories
-                ?? throw new JsonException("The category response did not contain a 'categories' list.");
         }
 
         private async void comboBoxDifficulty_SelectedIndexChanged(object sender, EventArgs e)
