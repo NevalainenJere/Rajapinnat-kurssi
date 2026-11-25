@@ -63,7 +63,8 @@ namespace Tietovisa
                 {
                     var json = await response.Content.ReadAsStringAsync();
                     var quizInfo = JsonSerializer.Deserialize<QuizInfo>(json);
-                    Quiz quiz = new();
+                    var quizInfoString = quizInfo?.ToString();
+                    Quiz quiz = new(quizInfo);
                     quiz.Show();
                 }
                 else
@@ -89,6 +90,8 @@ namespace Tietovisa
             }
             if (comboBoxCategory.SelectedItem != null & comboBoxDifficulty.SelectedItem != null)
             {
+                comboBoxNumberOfQuestions.Items.Clear();
+
                 var categoryId = comboBoxCategory.SelectedValue;
 
                 string endpointNumberOfQuestions = "https://opentdb.com/api_count.php?category=" + categoryId;
@@ -121,7 +124,7 @@ namespace Tietovisa
 
                 if (difficulty == "Easy")
                 {
-                    for (int i = 0; i < questionCountEasy; i++)
+                    for (int i = 1; i < questionCountEasy; i++)
                     {
                         questionCountListEasy.Add(i);
                         comboBoxNumberOfQuestions.Items.Add(i);
@@ -129,7 +132,7 @@ namespace Tietovisa
                 }
                 else if (difficulty == "Medium")
                 {
-                    for (int i = 0; i < questionCountMedium; i++)
+                    for (int i = 1; i < questionCountMedium; i++)
                     {
                         questionCountListMedium.Add(i);
                         comboBoxNumberOfQuestions.Items.Add(i);
@@ -137,7 +140,7 @@ namespace Tietovisa
                 }
                 else if (difficulty == "Hard")
                 {
-                    for (int i = 0; i < questionCountHard; i++)
+                    for (int i = 1; i < questionCountHard; i++)
                     {
                         questionCountListHard.Add(i);
                         comboBoxNumberOfQuestions.Items.Add(i);
@@ -145,7 +148,7 @@ namespace Tietovisa
                 }
                 else
                 {
-
+                    MessageBox.Show("Wait what?");
                 }
             }
         }
@@ -174,8 +177,9 @@ namespace Tietovisa
             await ComboBoxItemFetch();
         }
 
-        private void comboBoxCategory_SelectedIndexChanged(object sender, EventArgs e)
+        private async void comboBoxCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
+            await ComboBoxItemFetch();
         }
     }
 }

@@ -28,18 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
+            richTextBox1 = new RichTextBox();
             SuspendLayout();
+            // 
+            // richTextBox1
+            // 
+            richTextBox1.Location = new Point(75, 51);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Size = new Size(615, 358);
+            richTextBox1.TabIndex = 0;
+            richTextBox1.Text = "";
             // 
             // Quiz
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(richTextBox1);
             Name = "Quiz";
             Text = "Quiz";
             ResumeLayout(false);
         }
 
         #endregion
+
+        private RichTextBox richTextBox1;
     }
 }
