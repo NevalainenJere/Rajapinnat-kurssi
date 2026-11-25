@@ -38,14 +38,14 @@ namespace Tietovisa
         {
             try
             {
-                numberOfQuestions = comboBoxNumberOfQuestions.SelectedItem?.ToString()
-                    ?? throw new InvalidOperationException("Please select the amount of questions");
                 category = comboBoxCategory.SelectedValue?.ToString()?.ToLower()
                     ?? throw new InvalidOperationException("Please select a category.");
-                difficulty = comboBoxDifficulty.SelectedItem?.ToString()?.ToLower()
-                    ?? throw new InvalidOperationException("Please select the difficulty.");
                 questionType = comboBoxQuestionType.SelectedItem?.ToString()?.ToLower()
                     ?? throw new InvalidOperationException("Please select the question type.");
+                difficulty = comboBoxDifficulty.SelectedItem?.ToString()?.ToLower()
+                    ?? throw new InvalidOperationException("Please select the difficulty.");
+                numberOfQuestions = comboBoxNumberOfQuestions.SelectedItem?.ToString()
+                    ?? throw new InvalidOperationException("Please select the amount of questions");
 
                 if (questionType == "multiple choice")
                 {
@@ -66,6 +66,9 @@ namespace Tietovisa
                     var quizInfoString = quizInfo?.ToString();
                     Quiz quiz = new(quizInfo);
                     quiz.Show();
+                    quiz.FormClosed += (_, _) => Show();
+                    Hide();
+
                 }
                 else
                 {
@@ -122,7 +125,7 @@ namespace Tietovisa
                     questionCountHard = 50;
                 }
 
-                if (difficulty == "Easy")
+                if (difficulty == "easy")
                 {
                     for (int i = 1; i < questionCountEasy; i++)
                     {
@@ -130,7 +133,7 @@ namespace Tietovisa
                         comboBoxNumberOfQuestions.Items.Add(i);
                     }
                 }
-                else if (difficulty == "Medium")
+                else if (difficulty == "medium")
                 {
                     for (int i = 1; i < questionCountMedium; i++)
                     {
@@ -138,7 +141,7 @@ namespace Tietovisa
                         comboBoxNumberOfQuestions.Items.Add(i);
                     }
                 }
-                else if (difficulty == "Hard")
+                else if (difficulty == "hard")
                 {
                     for (int i = 1; i < questionCountHard; i++)
                     {
@@ -148,7 +151,7 @@ namespace Tietovisa
                 }
                 else
                 {
-                    MessageBox.Show("Wait what?");
+                    MessageBox.Show("Hähh?");
                 }
             }
         }
@@ -173,7 +176,7 @@ namespace Tietovisa
 
         private async void comboBoxDifficulty_SelectedIndexChanged(object sender, EventArgs e)
         {
-            difficulty = comboBoxDifficulty.SelectedItem.ToString();
+            difficulty = comboBoxDifficulty.SelectedItem.ToString().ToLower();
             await ComboBoxItemFetch();
         }
 
