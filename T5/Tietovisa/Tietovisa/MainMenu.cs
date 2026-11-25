@@ -78,9 +78,11 @@ namespace Tietovisa
             {
                 await CategoryFetch();
             }
-            if (comboBoxCategory.DisplayMember != "" & comboBoxDifficulty.SelectedItem != null)
+            if (comboBoxCategory.SelectedItem != null & comboBoxDifficulty.SelectedItem != null)
             {
-                string endpointNumberOfQuestions = "https://opentdb.com/api_count.php?category=" + "";
+                var categoryId = comboBoxCategory.SelectedValue;
+
+                string endpointNumberOfQuestions = "https://opentdb.com/api_count.php?category=" + categoryId;
                 using var clientNumberOfQuestions = new HttpClient();
                 using var responseNumberOfQuestions = await clientNumberOfQuestions.GetAsync(endpointNumberOfQuestions);
                 responseNumberOfQuestions.EnsureSuccessStatusCode();
@@ -142,13 +144,30 @@ namespace Tietovisa
             comboBoxCategory.ValueMember = nameof(TriviaCategory.Id);
             comboBoxCategory.DataSource = categories;
 
-            
+        }
+        private async void CategorySelect()
+        {
+            var categoryId = comboBoxCategory.SelectedValue;
+
+            string endpointCategorySelect = "https://opentdb.com/api_count.php?category=" + categoryId;
+            using var clientCategorySelect = new HttpClient();
+            using var responseCategorySelect = await clientCategorySelect.GetAsync(endpointCategorySelect);
+            responseCategorySelect.EnsureSuccessStatusCode();
+
+            var jsonCategorySelect = await responseCategorySelect.Content.ReadAsStringAsync();
+            var categorySelectInfo = JsonSerializer.Deserialize<CategoryInfo>(jsonCategorySelect);
+            var categorySelected = categorySelectInfo?.TriviaCategories
+                ?? throw new JsonException("The category response did not contain a 'categories' list.");
         }
 
         private async void comboBoxDifficulty_SelectedIndexChanged(object sender, EventArgs e)
         {
             difficulty = comboBoxDifficulty.SelectedItem.ToString();
             await ComboBoxItemFetch();
+        }
+
+        private void comboBoxCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
         }
     }
 }

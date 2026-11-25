@@ -91,6 +91,7 @@
             comboBoxCategory.Name = "comboBoxCategory";
             comboBoxCategory.Size = new Size(240, 28);
             comboBoxCategory.TabIndex = 0;
+            comboBoxCategory.SelectedIndexChanged += comboBoxCategory_SelectedIndexChanged;
             // 
             // comboBoxQuestionType
             // 
