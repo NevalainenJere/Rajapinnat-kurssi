@@ -1,6 +1,6 @@
 ﻿namespace Tietovisa
 {
-    partial class Quiz
+    partial class QuizBoolean
     {
         /// <summary>
         /// Required designer variable.
@@ -28,30 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            richTextBox1 = new RichTextBox();
-            SuspendLayout();
-            // 
-            // richTextBox1
-            // 
-            richTextBox1.Location = new Point(75, 51);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(615, 358);
-            richTextBox1.TabIndex = 0;
-            richTextBox1.Text = "";
-            // 
-            // Quiz
-            // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(richTextBox1);
-            Name = "Quiz";
-            Text = "Quiz";
-            ResumeLayout(false);
+            this.components = new System.ComponentModel.Container();
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Text = "QuizBoolean";
         }
 
         #endregion
-
-        private RichTextBox richTextBox1;
     }
 }

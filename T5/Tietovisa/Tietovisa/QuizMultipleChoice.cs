@@ -8,13 +8,21 @@ using System.Windows.Forms;
 
 namespace Tietovisa
 {
-    public partial class Quiz : Form
+    public partial class QuizMultipleChoice : Form
     {
         private readonly QuizInfo _quizInfo;
-        public Quiz(QuizInfo quizInfo, int questionCount)
+        List<Result> questions = new();
+        public QuizMultipleChoice(QuizInfo quizInfo, int questionCount)
         {
             InitializeComponent();
             _quizInfo = quizInfo;
+
+
+
+            foreach (var question in quizInfo.results)
+            {
+                questions.Add(question);
+            }
 
         }
     }

@@ -47,6 +47,8 @@ namespace Tietovisa
                 numberOfQuestions = comboBoxNumberOfQuestions.SelectedItem?.ToString()
                     ?? throw new InvalidOperationException("Please select the amount of questions");
 
+                int numberOfQuestionsInt = Convert.ToInt32(numberOfQuestions);
+
                 if (questionType == "multiple choice")
                 {
                     questionType = "multiple";
@@ -64,11 +66,21 @@ namespace Tietovisa
                     var json = await response.Content.ReadAsStringAsync();
                     var quizInfo = JsonSerializer.Deserialize<QuizInfo>(json);
                     var quizInfoString = quizInfo?.ToString();
-                    Quiz quiz = new(quizInfo, numberOfQuestions);
-                    quiz.Show();
-                    quiz.FormClosed += (_, _) => Show();
-                    Hide();
 
+                    if (questionType == "multiple")
+                    {
+                        QuizMultipleChoice quiz = new(quizInfo, numberOfQuestionsInt);
+                        quiz.Show();
+                        quiz.FormClosed += (_, _) => Show();
+                        Hide();
+                    }
+                    else if (questionType == "boolean")
+                    {
+                        QuizBoolean quiz = new(quizInfo, numberOfQuestionsInt);
+                        quiz.Show();
+                        quiz.FormClosed += (_, _) => Show();
+                        Hide();
+                    }
                 }
                 else
                 {
