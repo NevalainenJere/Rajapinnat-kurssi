@@ -42,6 +42,7 @@
             buttonTrue.TabIndex = 0;
             buttonTrue.Text = "TRUE";
             buttonTrue.UseVisualStyleBackColor = true;
+            buttonTrue.Click += buttonTrue_Click;
             // 
             // buttonFalse
             // 
@@ -52,6 +53,7 @@
             buttonFalse.TabIndex = 0;
             buttonFalse.Text = "FALSE";
             buttonFalse.UseVisualStyleBackColor = true;
+            buttonFalse.Click += buttonFalse_Click;
             // 
             // labelQuestion
             // 
