@@ -11,12 +11,11 @@ namespace Tietovisa
     public partial class Quiz : Form
     {
         private readonly QuizInfo _quizInfo;
-        public Quiz(QuizInfo quizInfo)
+        public Quiz(QuizInfo quizInfo, int questionCount)
         {
             InitializeComponent();
             _quizInfo = quizInfo;
 
-            richTextBox1.Text = _quizInfo.results[1].question;
         }
     }
 }

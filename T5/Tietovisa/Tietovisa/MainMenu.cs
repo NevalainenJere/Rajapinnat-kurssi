@@ -64,7 +64,7 @@ namespace Tietovisa
                     var json = await response.Content.ReadAsStringAsync();
                     var quizInfo = JsonSerializer.Deserialize<QuizInfo>(json);
                     var quizInfoString = quizInfo?.ToString();
-                    Quiz quiz = new(quizInfo);
+                    Quiz quiz = new(quizInfo, numberOfQuestions);
                     quiz.Show();
                     quiz.FormClosed += (_, _) => Show();
                     Hide();
