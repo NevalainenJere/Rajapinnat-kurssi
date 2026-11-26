@@ -20,14 +20,23 @@ namespace Tietovisa
         {
             InitializeComponent();
 
-            for (int i = 0; i < questionCount; i++)
-            {
-                var currentInfo = quizInfo.results[i];
-                string currentQuestion = quizInfo.results[i].question;
-                labelQuestion.Text = currentQuestion;
-                sustain = 0;
+            userAnswer = "none";
 
-                AnswerValidation(currentInfo, sustain);
+            if (userAnswer == "none")
+            {
+
+            }
+            else if (userAnswer != "none") 
+            {
+                for (int i = 0; i < questionCount; i++)
+                {
+                    var currentInfo = quizInfo.results[i];
+                    string currentQuestion = quizInfo.results[i].question;
+                    labelQuestion.Text = currentQuestion;
+                    sustain = 0;
+
+                    AnswerValidation(currentInfo, sustain);
+                }
             }
             labelQuestion.Text = "Quiz finished.";
         }
